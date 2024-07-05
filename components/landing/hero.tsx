@@ -7,6 +7,8 @@ import Balancer from "react-wrap-balancer";
 import { ArrowDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 // UI Components
 import { Button } from "@/components/ui/button";
@@ -47,6 +49,15 @@ export default function Hero() {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      toast("hello there");
+      toast("hello there 2");
+    });
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <Section>
