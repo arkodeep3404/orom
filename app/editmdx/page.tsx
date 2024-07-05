@@ -3,12 +3,12 @@
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import remarkGfm from "remark-gfm";
 import { evaluate } from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime";
-import { mdxStyles } from "../mdxStyles/mdxStyles";
-import { Note } from "../mdxStyles/Callouts";
+import { mdxStyles } from "../../lib/mdxStyles/mdxStyles";
+import { Note } from "../../lib/mdxStyles/Callouts";
 import { EvaluateOptions } from "@mdx-js/mdx";
 import { MDXContent } from "mdx/types";
 

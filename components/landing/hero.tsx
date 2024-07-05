@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/form";
 
 // Custom Components
-import { Section, Container } from "@/app/craft";
+import { Section, Container } from "@/components/craft";
 
 // Assets
 import Placeholder from "@/public/placeholder.jpg";
