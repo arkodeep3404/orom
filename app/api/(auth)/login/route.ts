@@ -41,9 +41,13 @@ export async function POST(req: Request) {
     const jwtToken = await new SignJWT({})
       .setProtectedHeader({ alg: "HS256" })
       .setJti(userId)
+      .setExpirationTime("30d")
       .sign(new TextEncoder().encode(process.env.JWT_SECRET));
 
-    cookies().set("orom_auth", jwtToken);
+    cookies().set("orom_auth", jwtToken, {
+      maxAge: 1000 * 60 * 60 * 60 * 24 * 30,
+      expires: 1000 * 60 * 60 * 60 * 24 * 30,
+    });
 
     return Response.json(
       {

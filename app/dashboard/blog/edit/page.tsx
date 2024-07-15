@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 import remarkGfm from "remark-gfm";
 import { evaluate } from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime";
-import { mdxStyles } from "../../lib/mdxStyles/mdxStyles";
-import { Note } from "../../lib/mdxStyles/Callouts";
+import { mdxStyles } from "@/lib/mdxStyles/mdxStyles";
+import { Note } from "@/lib/mdxStyles/Callouts";
 import { EvaluateOptions } from "@mdx-js/mdx";
 import { MDXContent } from "mdx/types";
 
