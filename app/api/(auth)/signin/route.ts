@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import User from "@/lib/dbSchema";
+import { User } from "@/lib/dbSchema";
 import zod from "zod";
 import { sendLoginEmail } from "@/lib/sendEmail";
 

@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import User from "@/lib/dbSchema";
+import { User } from "@/lib/dbSchema";
 import zod from "zod";
 import { cookies } from "next/headers";
 import { SignJWT } from "jose";

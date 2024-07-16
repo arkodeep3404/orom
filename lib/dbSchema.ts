@@ -7,6 +7,19 @@ export interface User extends Document {
   lastName: string;
 }
 
+export interface detailsType {
+  title: string;
+  description: string;
+  duration: number;
+  start: number;
+}
+
+export interface Popup extends Document {
+  userId: mongoose.Schema.Types.ObjectId;
+  name: string;
+  details: detailsType[];
+}
+
 const UserSchema: Schema<User> = new mongoose.Schema({
   email: {
     type: String,
@@ -28,8 +41,22 @@ const UserSchema: Schema<User> = new mongoose.Schema({
   },
 });
 
+const PopupSchema: Schema<Popup> = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, "UserId is required"],
+  },
+  details: {
+    required: [true, "Detail is required"],
+  },
+});
+
 const User =
   (mongoose.models.User as mongoose.Model<User>) ||
   mongoose.model<User>("User", UserSchema);
 
-export default User;
+const Popup =
+  (mongoose.models.Popup as mongoose.Model<Popup>) ||
+  mongoose.model<Popup>("Popup", PopupSchema);
+
+export { User, Popup };

@@ -12,33 +12,71 @@ import AddPopup from "@/components/dashboard/popup/addPopup";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   popupState,
+  popupNumber,
   popupTitle,
   popupDescription,
   popupDuration,
   popupStart,
 } from "@/store/atoms";
-import { v4 as uuid } from "uuid";
+import axios from "axios";
+import { toast } from "sonner";
 
 export default function PopupEditor() {
-  const [popupCards, setPopupCards] = useRecoilState(popupState);
+  const [popupCardsContent, setPopupCardsContent] = useRecoilState(popupState);
+  const [popupCardsNumber, setPopupCardsNumber] = useRecoilState(popupNumber);
+
   const title = useRecoilValue(popupTitle);
   const description = useRecoilValue(popupDescription);
   const duration = useRecoilValue(popupDuration);
   const start = useRecoilValue(popupStart);
 
-  function addPopupCard() {
-    console.log(popupCards);
+  function addPopupCards() {
+    if (popupCardsNumber.length === 0) {
+      setPopupCardsNumber([...popupCardsNumber, popupCardsNumber.length]);
+    } else {
+      setPopupCardsContent((prevContent) => [
+        ...prevContent,
+        {
+          title: title,
+          description: description,
+          duration: Number(duration),
+          start: Number(start),
+        },
+      ]);
 
-    setPopupCards([
-      ...popupCards,
-      {
-        id: uuid(),
-        title: title,
-        description: description,
-        duration: duration,
-        start: start,
-      },
-    ]);
+      setPopupCardsNumber([...popupCardsNumber, popupCardsNumber.length]);
+    }
+  }
+
+  async function savePopupCards() {
+    if (popupCardsNumber.length === 0) {
+      toast("no data to save");
+    } else {
+      setPopupCardsContent((prevContent) => {
+        const newContent = [
+          ...prevContent,
+          {
+            title: title,
+            description: description,
+            duration: Number(duration),
+            start: Number(start),
+          },
+        ];
+
+        axios
+          .post("/api/dashboard/popup", {
+            popupCardsContent: newContent,
+          })
+          .then((response) => {
+            toast(response.data.message);
+          })
+          .catch((error) => {
+            toast(error.response.data.message);
+          });
+
+        return newContent;
+      });
+    }
   }
 
   return (
@@ -51,11 +89,11 @@ export default function PopupEditor() {
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-evenly">
-          <Button onClick={addPopupCard}>Add new</Button>
-          <Button>Save</Button>
+          <Button onClick={addPopupCards}>Add new</Button>
+          <Button onClick={savePopupCards}>Save</Button>
         </CardFooter>
       </Card>
-      {popupCards.map((_, index) => (
+      {popupCardsNumber.map((_, index) => (
         <AddPopup key={index} />
       ))}
     </div>

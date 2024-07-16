@@ -1,4 +1,4 @@
-import User from "@/lib/dbSchema";
+import { User } from "@/lib/dbSchema";
 import zod from "zod";
 import dbConnect from "@/lib/dbConnect";
 import { sendLoginEmail } from "@/lib/sendEmail";
