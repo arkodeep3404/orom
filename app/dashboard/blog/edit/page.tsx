@@ -12,7 +12,7 @@ import { Note } from "@/lib/mdxStyles/Callouts";
 import { EvaluateOptions } from "@mdx-js/mdx";
 import { MDXContent } from "mdx/types";
 
-export default function Editor() {
+export default function BlogEditor() {
   const [blog, setBlog] = useState<string>("");
   const [finalMdx, setFinalMdx] = useState<MDXContent | any | string>("");
   const [show, setShow] = useState<boolean>(false);
