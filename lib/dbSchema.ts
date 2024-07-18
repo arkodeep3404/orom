@@ -7,7 +7,7 @@ export interface User extends Document {
   lastName: string;
 }
 
-export interface detailsType {
+export interface PopupDetailsType extends Document {
   title: string;
   description: string;
   duration: number;
@@ -16,9 +16,17 @@ export interface detailsType {
 
 export interface Popup extends Document {
   userId: mongoose.Schema.Types.ObjectId;
-  name: string;
-  details: detailsType[];
+  popupUId: string;
+  popupDetails: PopupDetailsType[];
 }
+
+export const PopupDetailsTypeSchema: Schema<PopupDetailsType> =
+  new mongoose.Schema({
+    title: { type: String, required: [true, "Title is required"] },
+    description: { type: String, required: [true, "Description is required"] },
+    duration: { type: Number, required: [true, "Duration is required"] },
+    start: { type: Number, required: [true, "Start is required"] },
+  });
 
 const UserSchema: Schema<User> = new mongoose.Schema({
   email: {
@@ -46,7 +54,13 @@ const PopupSchema: Schema<Popup> = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: [true, "UserId is required"],
   },
-  details: {
+  popupUId: {
+    type: String,
+    required: [true, "Popup-UId is required"],
+    unique: true,
+  },
+  popupDetails: {
+    type: [PopupDetailsTypeSchema],
     required: [true, "Detail is required"],
   },
 });

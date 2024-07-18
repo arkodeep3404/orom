@@ -4,34 +4,33 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSetRecoilState } from "recoil";
-import {
-  popupTitle,
-  popupDescription,
-  popupDuration,
-  popupStart,
-} from "@/store/atoms";
+import { popupType, popupState, saveButton } from "@/store/atoms";
 
-export default function AddPopup() {
-  const setTitle = useSetRecoilState(popupTitle);
-  const setDescription = useSetRecoilState(popupDescription);
-  const setDuration = useSetRecoilState(popupDuration);
-  const setStart = useSetRecoilState(popupStart);
+export default function AddPopup({ data }: { data: popupType }) {
+  const setPopupCardsContent = useSetRecoilState(popupState);
+  const setSaveButtonStatus = useSetRecoilState(saveButton);
 
-  function updatePopupCards(id: string) {
-    setPopupCardsContent((prevContent) => {
-      const newContent = [
-        ...prevContent,
-        {
-          id,
-          title: title,
-          description: description,
-          duration: Number(duration),
-          start: Number(start),
-        },
-      ];
+  function updatePopupCards(
+    id: string,
+    field: string,
+    value: string | number | any
+  ) {
+    setPopupCardsContent((prevContent) =>
+      prevContent.map((cardData) => {
+        if (cardData.id === id) {
+          return {
+            ...cardData,
+            [field]:
+              field === "duration" || field === "start"
+                ? Number(value)
+                : value.trim(),
+          };
+        }
+        return cardData;
+      })
+    );
 
-      return newContent;
-    });
+    setSaveButtonStatus(true);
   }
 
   return (
@@ -45,7 +44,9 @@ export default function AddPopup() {
                 <Input
                   id="title"
                   placeholder="Title of pop-up"
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) =>
+                    updatePopupCards(data.id, "title", e.target.value)
+                  }
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -53,7 +54,9 @@ export default function AddPopup() {
                 <Input
                   id="description"
                   placeholder="Description of pop-up"
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) =>
+                    updatePopupCards(data.id, "description", e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -66,7 +69,9 @@ export default function AddPopup() {
                 <Input
                   id="duration"
                   placeholder="Duration of display of pop-up"
-                  onChange={(e) => setDuration(e.target.value)}
+                  onChange={(e) =>
+                    updatePopupCards(data.id, "duration", e.target.value)
+                  }
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -74,7 +79,9 @@ export default function AddPopup() {
                 <Input
                   id="start"
                   placeholder="Start time of pop-up"
-                  onChange={(e) => setStart(e.target.value)}
+                  onChange={(e) =>
+                    updatePopupCards(data.id, "start", e.target.value)
+                  }
                 />
               </div>
             </div>

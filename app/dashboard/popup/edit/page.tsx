@@ -9,63 +9,57 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import AddPopup from "@/components/dashboard/popup/addPopup";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  popupState,
-  popupNumber,
-  popupTitle,
-  popupDescription,
-  popupDuration,
-  popupStart,
-} from "@/store/atoms";
+import { useRecoilState } from "recoil";
+import { popupState, saveButton } from "@/store/atoms";
 import axios from "axios";
 import { toast } from "sonner";
 import { v4 } from "uuid";
 
 export default function PopupEditor() {
   const [popupCardsContent, setPopupCardsContent] = useRecoilState(popupState);
-  const [popupCardsNumber, setPopupCardsNumber] = useRecoilState(popupNumber);
-
-  const title = useRecoilValue(popupTitle);
-  const description = useRecoilValue(popupDescription);
-  const duration = useRecoilValue(popupDuration);
-  const start = useRecoilValue(popupStart);
+  const [saveButtonStatus, setSaveButtonStatus] = useRecoilState(saveButton);
 
   function addPopupCards() {
-    if (popupCardsNumber.length === 0) {
-      setPopupCardsNumber([...popupCardsNumber, popupCardsNumber.length]);
-    } else {
-      setPopupCardsContent((prevContent) => [
-        ...prevContent,
-        {
-          id: v4(),
-          title: "",
-          description: "",
-          duration: 0,
-          start: 0,
-        },
-      ]);
-
-      setPopupCardsNumber([...popupCardsNumber, popupCardsNumber.length]);
-    }
+    setPopupCardsContent((prevContent) => [
+      ...prevContent,
+      {
+        id: v4(),
+        title: "",
+        description: "",
+        duration: 0,
+        start: 0,
+      },
+    ]);
   }
 
   async function savePopupCards() {
-    if (popupCardsNumber.length === 0) {
-      toast("no data to save");
+    const isEmptyField = popupCardsContent.some((cardData) => {
+      return (
+        cardData.title === "" ||
+        cardData.description === "" ||
+        cardData.duration === 0 ||
+        cardData.start === 0
+      );
+    });
+
+    if (isEmptyField) {
+      toast("fill in all the fields before saving");
       return;
-    } else {
-      axios
-        .post("/api/dashboard/popup", {
-          popupCardsContent: popupCardsContent,
-        })
-        .then((response) => {
-          toast(response.data.message);
-        })
-        .catch((error) => {
-          toast(error.response.data.message);
-        });
     }
+
+    axios
+      .post("/api/dashboard/popup/createNewPopup", {
+        popupDetails: popupCardsContent,
+        popupUId: v4(),
+      })
+      .then((response) => {
+        toast(response.data.message);
+      })
+      .catch((error) => {
+        toast(error.response.data.message);
+      });
+
+    setSaveButtonStatus(false);
   }
 
   return (
@@ -79,11 +73,15 @@ export default function PopupEditor() {
         </CardHeader>
         <CardFooter className="flex justify-evenly">
           <Button onClick={addPopupCards}>Add new</Button>
-          <Button onClick={savePopupCards}>Save</Button>
+
+          <Button onClick={savePopupCards} disabled={!saveButtonStatus}>
+            Save
+          </Button>
         </CardFooter>
       </Card>
-      {popupCardsNumber.map((_, index) => (
-        <AddPopup key={index} />
+
+      {popupCardsContent.map((data, index) => (
+        <AddPopup key={index} data={data} />
       ))}
     </div>
   );

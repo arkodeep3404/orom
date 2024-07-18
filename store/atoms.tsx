@@ -2,7 +2,7 @@
 
 import { RecoilRoot, atom } from "recoil";
 
-type popupType = {
+export type popupType = {
   id: string;
   title: string;
   description: string;
@@ -15,29 +15,9 @@ export const popupState = atom<popupType[]>({
   default: [],
 });
 
-export const popupNumber = atom<number[]>({
-  key: "popupNumber",
-  default: [],
-});
-
-export const popupTitle = atom({
-  key: "popupTitle",
-  default: "",
-});
-
-export const popupDescription = atom({
-  key: "popupDescription",
-  default: "",
-});
-
-export const popupDuration = atom({
-  key: "popupDuration",
-  default: 0,
-});
-
-export const popupStart = atom({
-  key: "popupStart",
-  default: 0,
+export const saveButton = atom<boolean>({
+  key: "saveButton",
+  default: false,
 });
 
 export default function RecoilContextProvider({
