@@ -16,7 +16,7 @@ export interface PopupDetailsType extends Document {
 
 export interface Popup extends Document {
   userId: mongoose.Schema.Types.ObjectId;
-  popupUId: string;
+  popupName: string;
   popupDetails: PopupDetailsType[];
 }
 
@@ -54,10 +54,9 @@ const PopupSchema: Schema<Popup> = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: [true, "UserId is required"],
   },
-  popupUId: {
+  popupName: {
     type: String,
-    required: [true, "Popup-UId is required"],
-    unique: true,
+    required: [true, "Popup name is required"],
   },
   popupDetails: {
     type: [PopupDetailsTypeSchema],

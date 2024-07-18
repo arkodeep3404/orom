@@ -48,7 +48,7 @@ export default function PopupEditor() {
     }
 
     axios
-      .post("/api/dashboard/popup/createNewPopup", {
+      .post("/api/dashboard/popup/createNew", {
         popupDetails: popupCardsContent,
         popupUId: v4(),
       })
