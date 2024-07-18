@@ -3,6 +3,7 @@
 import { RecoilRoot, atom } from "recoil";
 
 type popupType = {
+  id: string;
   title: string;
   description: string;
   duration: number;

@@ -20,6 +20,7 @@ import {
 } from "@/store/atoms";
 import axios from "axios";
 import { toast } from "sonner";
+import { v4 } from "uuid";
 
 export default function PopupEditor() {
   const [popupCardsContent, setPopupCardsContent] = useRecoilState(popupState);
@@ -37,10 +38,11 @@ export default function PopupEditor() {
       setPopupCardsContent((prevContent) => [
         ...prevContent,
         {
-          title: title,
-          description: description,
-          duration: Number(duration),
-          start: Number(start),
+          id: v4(),
+          title: "",
+          description: "",
+          duration: 0,
+          start: 0,
         },
       ]);
 
@@ -51,31 +53,18 @@ export default function PopupEditor() {
   async function savePopupCards() {
     if (popupCardsNumber.length === 0) {
       toast("no data to save");
+      return;
     } else {
-      setPopupCardsContent((prevContent) => {
-        const newContent = [
-          ...prevContent,
-          {
-            title: title,
-            description: description,
-            duration: Number(duration),
-            start: Number(start),
-          },
-        ];
-
-        axios
-          .post("/api/dashboard/popup", {
-            popupCardsContent: newContent,
-          })
-          .then((response) => {
-            toast(response.data.message);
-          })
-          .catch((error) => {
-            toast(error.response.data.message);
-          });
-
-        return newContent;
-      });
+      axios
+        .post("/api/dashboard/popup", {
+          popupCardsContent: popupCardsContent,
+        })
+        .then((response) => {
+          toast(response.data.message);
+        })
+        .catch((error) => {
+          toast(error.response.data.message);
+        });
     }
   }
 

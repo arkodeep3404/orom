@@ -17,6 +17,23 @@ export default function AddPopup() {
   const setDuration = useSetRecoilState(popupDuration);
   const setStart = useSetRecoilState(popupStart);
 
+  function updatePopupCards(id: string) {
+    setPopupCardsContent((prevContent) => {
+      const newContent = [
+        ...prevContent,
+        {
+          id,
+          title: title,
+          description: description,
+          duration: Number(duration),
+          start: Number(start),
+        },
+      ];
+
+      return newContent;
+    });
+  }
+
   return (
     <Card className="w-1/2">
       <CardContent>
