@@ -1,34 +1,34 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface User extends Document {
+export interface UserSchema extends Document {
   email: string;
   token: string;
   firstName: string;
   lastName: string;
 }
 
-export interface PopupDetailsType extends Document {
+export interface PopupDetailsType {
+  _id: mongoose.Types.ObjectId;
   title: string;
   description: string;
   duration: number;
   start: number;
 }
 
-export interface Popup extends Document {
-  userId: mongoose.Schema.Types.ObjectId;
+export interface PopupSchema extends Document {
+  userId: mongoose.Types.ObjectId;
   popupName: string;
   popupDetails: PopupDetailsType[];
 }
 
-export const PopupDetailsTypeSchema: Schema<PopupDetailsType> =
-  new mongoose.Schema({
-    title: { type: String, required: [true, "Title is required"] },
-    description: { type: String, required: [true, "Description is required"] },
-    duration: { type: Number, required: [true, "Duration is required"] },
-    start: { type: Number, required: [true, "Start is required"] },
-  });
+export const PopupDetailsTypeSchema: Schema<PopupDetailsType> = new Schema({
+  title: { type: String, required: [true, "Title is required"] },
+  description: { type: String, required: [true, "Description is required"] },
+  duration: { type: Number, required: [true, "Duration is required"] },
+  start: { type: Number, required: [true, "Start is required"] },
+});
 
-const UserSchema: Schema<User> = new mongoose.Schema({
+const UserSchema: Schema<UserSchema> = new Schema({
   email: {
     type: String,
     required: [true, "Email is required"],
@@ -49,9 +49,9 @@ const UserSchema: Schema<User> = new mongoose.Schema({
   },
 });
 
-const PopupSchema: Schema<Popup> = new mongoose.Schema({
+const PopupSchema: Schema<PopupSchema> = new Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: [true, "UserId is required"],
   },
   popupName: {
@@ -65,11 +65,11 @@ const PopupSchema: Schema<Popup> = new mongoose.Schema({
 });
 
 const userModel =
-  (mongoose.models.User as mongoose.Model<User>) ||
-  mongoose.model<User>("User", UserSchema);
+  (mongoose.models.User as mongoose.Model<UserSchema>) ||
+  mongoose.model<UserSchema>("User", UserSchema);
 
 const popupModel =
-  (mongoose.models.Popup as mongoose.Model<Popup>) ||
-  mongoose.model<Popup>("Popup", PopupSchema);
+  (mongoose.models.Popup as mongoose.Model<PopupSchema>) ||
+  mongoose.model<PopupSchema>("Popup", PopupSchema);
 
 export { userModel, popupModel };

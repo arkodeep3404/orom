@@ -3,16 +3,16 @@ import zod from "zod";
 import dbConnect from "@/lib/dbConnect";
 
 const popupsBody = zod.object({
+  popupId: zod.string(),
   popupDetails: zod.array(
     zod.object({
-      id: zod.string(),
+      _id: zod.string(),
       title: zod.string(),
       description: zod.string(),
       duration: zod.number(),
       start: zod.number(),
     })
   ),
-  popupUId: zod.string(),
 });
 
 export async function POST(req: Request) {
@@ -22,9 +22,7 @@ export async function POST(req: Request) {
   const parsedBody = await req.json();
 
   const { success } = popupsBody.safeParse(parsedBody);
-  const { popupDetails, popupUId } = parsedBody;
-
-  console.log(parsedBody);
+  const { popupId, popupDetails } = parsedBody;
 
   if (!success) {
     return Response.json(
@@ -35,29 +33,30 @@ export async function POST(req: Request) {
     );
   }
 
-  const existingPopup = await popupModel.findOne({
-    userId: userId,
-    popupUId: popupUId,
-  });
+  const existingPopup = await popupModel.findOneAndUpdate(
+    {
+      userId: userId,
+      _id: popupId,
+    },
+    {
+      $set: {
+        popupDetails: popupDetails,
+      },
+    }
+  );
 
-  if (existingPopup) {
+  if (!existingPopup) {
     return Response.json(
       {
-        message: "popup already exists",
+        message: "popup not found",
       },
-      { status: 411 }
+      { status: 404 }
     );
   }
 
-  const popup = await popupModel.create({
-    userId: userId,
-    popupUId: popupUId,
-    popupDetails: popupDetails,
-  });
-
   return Response.json(
     {
-      message: "popup created and saved",
+      message: "popup updated and saved",
     },
     { status: 200 }
   );

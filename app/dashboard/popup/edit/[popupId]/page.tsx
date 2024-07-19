@@ -8,22 +8,39 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import AddPopup from "@/components/dashboard/popup/addPopup";
+import AddPopupDetailsCard from "@/components/dashboard/popup/addPopupDetailsCard";
 import { useRecoilState } from "recoil";
 import { popupState, showSaveButton } from "@/store/atoms";
 import axios from "axios";
 import { toast } from "sonner";
-import { v4 } from "uuid";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
+import mongoose from "mongoose";
 
 export default function PopupEditor() {
+  const params = useParams();
   const [popupCardsContent, setPopupCardsContent] = useRecoilState(popupState);
-  const [saveButtonStatus, setSaveButtonStatus] = useRecoilState(showSaveButton);
+  const [saveButtonStatus, setSaveButtonStatus] =
+    useRecoilState(showSaveButton);
+
+  async function fetchPopupCards() {
+    const response = await axios.get("/api/dashboard/popup/getExisting", {
+      headers: { popupId: params.popupId },
+    });
+
+    setPopupCardsContent(response.data.currentPopup.popupDetails);
+    console.log(response.data.currentPopup.popupDetails);
+  }
+
+  useEffect(() => {
+    fetchPopupCards();
+  }, []);
 
   function addPopupCards() {
     setPopupCardsContent((prevContent) => [
       ...prevContent,
       {
-        id: v4(),
+        _id: new mongoose.Types.ObjectId(),
         title: "",
         description: "",
         duration: 0,
@@ -35,8 +52,8 @@ export default function PopupEditor() {
   async function savePopupCards() {
     const isEmptyField = popupCardsContent.some((cardData) => {
       return (
-        cardData.title === "" ||
-        cardData.description === "" ||
+        cardData.title.trim() === "" ||
+        cardData.description.trim() === "" ||
         cardData.duration === 0 ||
         cardData.start === 0
       );
@@ -48,9 +65,9 @@ export default function PopupEditor() {
     }
 
     axios
-      .post("/api/dashboard/popup/createNew", {
+      .post("/api/dashboard/popup/editExisting", {
+        popupId: params.popupId,
         popupDetails: popupCardsContent,
-        popupUId: v4(),
       })
       .then((response) => {
         toast(response.data.message);
@@ -81,7 +98,7 @@ export default function PopupEditor() {
       </Card>
 
       {popupCardsContent.map((data, index) => (
-        <AddPopup key={index} data={data} />
+        <AddPopupDetailsCard key={index} data={data} />
       ))}
     </div>
   );

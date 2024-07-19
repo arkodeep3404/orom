@@ -4,20 +4,26 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSetRecoilState } from "recoil";
-import { popupType, popupState, showSaveButton } from "@/store/atoms";
+import { popupState, showSaveButton } from "@/store/atoms";
+import { PopupDetailsType } from "@/lib/dbSchema";
+import mongoose from "mongoose";
 
-export default function AddPopup({ data }: { data: popupType }) {
+export default function AddPopupDetailsCard({
+  data,
+}: {
+  data: PopupDetailsType;
+}) {
   const setPopupCardsContent = useSetRecoilState(popupState);
   const setSaveButtonStatus = useSetRecoilState(showSaveButton);
 
   function updatePopupCards(
-    id: string,
+    _id: mongoose.Types.ObjectId,
     field: string,
     value: string | number | any
   ) {
     setPopupCardsContent((prevContent) =>
       prevContent.map((cardData) => {
-        if (cardData.id === id) {
+        if (cardData._id === _id) {
           return {
             ...cardData,
             [field]:
@@ -45,8 +51,9 @@ export default function AddPopup({ data }: { data: popupType }) {
                   id="title"
                   placeholder="Title of pop-up"
                   onChange={(e) =>
-                    updatePopupCards(data.id, "title", e.target.value)
+                    updatePopupCards(data._id, "title", e.target.value)
                   }
+                  value={data.title}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -55,8 +62,9 @@ export default function AddPopup({ data }: { data: popupType }) {
                   id="description"
                   placeholder="Description of pop-up"
                   onChange={(e) =>
-                    updatePopupCards(data.id, "description", e.target.value)
+                    updatePopupCards(data._id, "description", e.target.value)
                   }
+                  value={data.description}
                 />
               </div>
             </div>
@@ -70,8 +78,9 @@ export default function AddPopup({ data }: { data: popupType }) {
                   id="duration"
                   placeholder="Duration of display of pop-up"
                   onChange={(e) =>
-                    updatePopupCards(data.id, "duration", e.target.value)
+                    updatePopupCards(data._id, "duration", e.target.value)
                   }
+                  value={data.duration}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -80,8 +89,9 @@ export default function AddPopup({ data }: { data: popupType }) {
                   id="start"
                   placeholder="Start time of pop-up"
                   onChange={(e) =>
-                    updatePopupCards(data.id, "start", e.target.value)
+                    updatePopupCards(data._id, "start", e.target.value)
                   }
+                  value={data.start}
                 />
               </div>
             </div>

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useDashboardContent } from "@/lib/useDashboardContent";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -23,13 +24,29 @@ export default function CreateExistingDialog({
   service: string;
 }) {
   const [newName, setNewName] = useState("");
+  const setDashboardContent = useDashboardContent(service);
 
   async function createNewItem() {
-    const response = await axios.post(`/api/dashboard/${service}/createNew`, {
-      [`${service}Name`]: newName,
-    });
+    if (newName.trim() === "") {
+      toast("enter name to create");
+    } else {
+      const response1 = await axios.post(
+        `/api/dashboard/${service}/createNew`,
+        {
+          [`${service}Name`]: newName,
+        }
+      );
 
-    toast(response.data.message);
+      setNewName("");
+      toast(response1.data.message);
+
+      if (setDashboardContent !== null) {
+        const response2 = await axios.get("/api/dashboard/popup");
+        setDashboardContent(response2.data.popups);
+      } else {
+        toast("service not found");
+      }
+    }
   }
 
   return (
@@ -49,14 +66,16 @@ export default function CreateExistingDialog({
               placeholder="Pedro Duarte"
               className="col-span-3"
               onChange={(e) => setNewName(e.target.value)}
+              value={newName}
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit" onClick={createNewItem}>
-            {" "}
-            Create{" "}
-          </Button>
+          <DialogTrigger asChild>
+            <Button type="submit" onClick={createNewItem}>
+              Create
+            </Button>
+          </DialogTrigger>
         </DialogFooter>
       </DialogContent>
     </Dialog>

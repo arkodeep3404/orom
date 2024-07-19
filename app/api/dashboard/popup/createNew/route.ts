@@ -15,8 +15,6 @@ export async function POST(req: Request) {
   const { success } = createPopupBody.safeParse(parsedBody);
   const { popupName } = parsedBody;
 
-  console.log(parsedBody);
-
   if (!success) {
     return Response.json(
       {

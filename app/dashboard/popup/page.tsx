@@ -3,17 +3,18 @@
 import { Button } from "@/components/ui/button";
 import ExistingListCard from "@/components/dashboard/existingListCard";
 import CreateExistingDialog from "@/components/dashboard/createNewDialog";
+import { popupsList } from "@/store/atoms";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Popup } from "@/lib/dbSchema";
+import Link from "next/link";
+import { useRecoilState } from "recoil";
 
 export default function PopupDashboard() {
-  const [popupsList, setPopupsList] = useState<Array<Popup>>([]);
+  const [popupsListContent, setPopupsListContent] = useRecoilState(popupsList);
 
   async function fetchPopups() {
     const response = await axios.get("/api/dashboard/popup");
-    setPopupsList(response.data.popups);
-    console.log(response.data.popups);
+    setPopupsListContent(response.data.popups);
   }
 
   useEffect(() => {
@@ -29,9 +30,13 @@ export default function PopupDashboard() {
         />
       </div>
 
-      {popupsList.map((data, index) => (
-        <ExistingListCard key={index} title={data.popupName} />
-      ))}
+      <div className="flex">
+        {popupsListContent.map((data, index) => (
+          <Link key={index} href={`/dashboard/popup/edit/${data._id}`}>
+            <ExistingListCard key={index} title={data.popupName} />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
