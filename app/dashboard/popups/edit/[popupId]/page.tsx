@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import AddPopupDetailsCard from "@/components/dashboard/popups/addPopupDetailsCard";
+import PopupDetailsCard from "@/components/dashboard/popups/popupDetailsCard";
 import { useRecoilState } from "recoil";
 import { popupState, showSaveButton } from "@/store/atoms";
 import axios from "axios";
@@ -29,7 +29,6 @@ export default function PopupEditor() {
     });
 
     setPopupCardsContent(response.data.currentPopup.popupDetails);
-    console.log(response.data.currentPopup.popupDetails);
   }
 
   useEffect(() => {
@@ -98,7 +97,7 @@ export default function PopupEditor() {
       </Card>
 
       {popupCardsContent.map((data, index) => (
-        <AddPopupDetailsCard key={index} data={data} />
+        <PopupDetailsCard key={index} data={data} />
       ))}
     </div>
   );

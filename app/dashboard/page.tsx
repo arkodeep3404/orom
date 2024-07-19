@@ -1,9 +1,9 @@
-import Services from "@/components/dashboard/services";
+import DashboardServices from "@/components/dashboard/dashboardServices";
 
 export default function Dashboard() {
   return (
     <div className="flex h-screen items-center">
-      <Services />
+      <DashboardServices />
     </div>
   );
 }

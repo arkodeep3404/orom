@@ -30,7 +30,7 @@ import Placeholder from "@/public/placeholder.jpg";
 
 const formSchema = z.object({
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: "please enter a valid email address",
   }),
 });
 

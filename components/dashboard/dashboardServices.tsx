@@ -11,7 +11,7 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 
-export default function Services() {
+export default function DashboardServices() {
   const features = [
     {
       title: "Built for developers",

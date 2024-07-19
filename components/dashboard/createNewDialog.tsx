@@ -27,7 +27,6 @@ export default function CreateNewDialog({
   const setDashboardContent = useDashboardContent(service);
 
   async function createNewItem() {
-    console.log(service);
     if (newName.trim() === "") {
       toast("enter name to create");
     } else {

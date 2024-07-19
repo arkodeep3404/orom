@@ -32,7 +32,7 @@ export default function PopupDashboard() {
 
       <div className="flex">
         {popupsListContent.map((data, index) => (
-          <Link key={index} href={`/dashboard/popup/edit/${data._id}`}>
+          <Link key={index} href={`/dashboard/popups/edit/${data._id}`}>
             <ExistingListCard key={index} title={data.popupName} />
           </Link>
         ))}

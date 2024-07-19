@@ -3,17 +3,26 @@ import zod from "zod";
 import dbConnect from "@/lib/dbConnect";
 
 const createPopupBody = zod.object({
-  popupName: zod.string(),
+  popupsName: zod.string(),
 });
 
 export async function POST(req: Request) {
-  await dbConnect();
-
   const userId = req.headers.get("userId");
+
+  if (!userId) {
+    return Response.json(
+      {
+        message: "userId not found. please login",
+      },
+      { status: 401 }
+    );
+  }
+
+  await dbConnect();
   const parsedBody = await req.json();
 
   const { success } = createPopupBody.safeParse(parsedBody);
-  const { popupName } = parsedBody;
+  const { popupsName } = parsedBody;
 
   if (!success) {
     return Response.json(
@@ -26,7 +35,7 @@ export async function POST(req: Request) {
 
   const popup = await popupModel.create({
     userId: userId,
-    popupName: popupName,
+    popupName: popupsName,
   });
 
   return Response.json(

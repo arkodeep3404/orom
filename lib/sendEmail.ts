@@ -25,9 +25,9 @@ export async function sendLoginEmail(
         <a href = "${BASE_URL}/login?token=${token}"> Click Here </a>`,
     });
 
-    return { success: true, message: "Login email sent successfully." };
-  } catch (emailError) {
-    console.error("Error sending login email:", emailError);
-    return { success: false, message: "Failed to send Login email." };
+    return { success: true, message: "login email sent successfully" };
+  } catch (error) {
+    console.error("Error sending login email: ", error);
+    return { success: false, message: "failed to send login email" };
   }
 }

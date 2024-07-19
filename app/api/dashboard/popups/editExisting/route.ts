@@ -16,9 +16,18 @@ const popupsBody = zod.object({
 });
 
 export async function POST(req: Request) {
-  await dbConnect();
-
   const userId = req.headers.get("userId");
+
+  if (!userId) {
+    return Response.json(
+      {
+        message: "userId not found. please login",
+      },
+      { status: 401 }
+    );
+  }
+
+  await dbConnect();
   const parsedBody = await req.json();
 
   const { success } = popupsBody.safeParse(parsedBody);

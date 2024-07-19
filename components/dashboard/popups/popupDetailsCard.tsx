@@ -8,11 +8,7 @@ import { popupState, showSaveButton } from "@/store/atoms";
 import { PopupDetailsType } from "@/lib/dbSchema";
 import mongoose from "mongoose";
 
-export default function AddPopupDetailsCard({
-  data,
-}: {
-  data: PopupDetailsType;
-}) {
+export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
   const setPopupCardsContent = useSetRecoilState(popupState);
   const setSaveButtonStatus = useSetRecoilState(showSaveButton);
 
