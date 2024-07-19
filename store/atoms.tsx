@@ -15,7 +15,7 @@ export const popupState = atom<popupType[]>({
   default: [],
 });
 
-export const saveButton = atom<boolean>({
+export const showSaveButton = atom<boolean>({
   key: "saveButton",
   default: false,
 });

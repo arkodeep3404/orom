@@ -1,4 +1,4 @@
-import { Popup } from "@/lib/dbSchema";
+import { popupModel } from "@/lib/dbSchema";
 import zod from "zod";
 import dbConnect from "@/lib/dbConnect";
 
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const existingPopup = await Popup.findOne({
+  const existingPopup = await popupModel.findOne({
     userId: userId,
     popupUId: popupUId,
   });
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const popup = await Popup.create({
+  const popup = await popupModel.create({
     userId: userId,
     popupUId: popupUId,
     popupDetails: popupDetails,

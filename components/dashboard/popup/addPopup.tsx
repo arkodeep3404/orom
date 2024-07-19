@@ -4,11 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSetRecoilState } from "recoil";
-import { popupType, popupState, saveButton } from "@/store/atoms";
+import { popupType, popupState, showSaveButton } from "@/store/atoms";
 
 export default function AddPopup({ data }: { data: popupType }) {
   const setPopupCardsContent = useSetRecoilState(popupState);
-  const setSaveButtonStatus = useSetRecoilState(saveButton);
+  const setSaveButtonStatus = useSetRecoilState(showSaveButton);
 
   function updatePopupCards(
     id: string,

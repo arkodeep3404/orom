@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import { User } from "@/lib/dbSchema";
+import { userModel } from "@/lib/dbSchema";
 import zod from "zod";
 import { cookies } from "next/headers";
 import { SignJWT } from "jose";
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const user = await User.findOneAndUpdate(
+  const user = await userModel.findOneAndUpdate(
     {
       token: token,
     },

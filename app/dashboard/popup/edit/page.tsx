@@ -10,14 +10,14 @@ import {
 } from "@/components/ui/card";
 import AddPopup from "@/components/dashboard/popup/addPopup";
 import { useRecoilState } from "recoil";
-import { popupState, saveButton } from "@/store/atoms";
+import { popupState, showSaveButton } from "@/store/atoms";
 import axios from "axios";
 import { toast } from "sonner";
 import { v4 } from "uuid";
 
 export default function PopupEditor() {
   const [popupCardsContent, setPopupCardsContent] = useRecoilState(popupState);
-  const [saveButtonStatus, setSaveButtonStatus] = useRecoilState(saveButton);
+  const [saveButtonStatus, setSaveButtonStatus] = useRecoilState(showSaveButton);
 
   function addPopupCards() {
     setPopupCardsContent((prevContent) => [

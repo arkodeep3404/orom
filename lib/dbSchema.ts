@@ -64,12 +64,12 @@ const PopupSchema: Schema<Popup> = new mongoose.Schema({
   },
 });
 
-const User =
+const userModel =
   (mongoose.models.User as mongoose.Model<User>) ||
   mongoose.model<User>("User", UserSchema);
 
-const Popup =
+const popupModel =
   (mongoose.models.Popup as mongoose.Model<Popup>) ||
   mongoose.model<Popup>("Popup", PopupSchema);
 
-export { User, Popup };
+export { userModel, popupModel };

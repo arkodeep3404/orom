@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import { User } from "@/lib/dbSchema";
+import { userModel } from "@/lib/dbSchema";
 import zod from "zod";
 import { sendLoginEmail } from "@/lib/sendEmail";
 
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     .map(() => Math.random().toString(36)[2])
     .join("");
 
-  const user = await User.findOneAndUpdate(
+  const user = await userModel.findOneAndUpdate(
     {
       email: email,
     },

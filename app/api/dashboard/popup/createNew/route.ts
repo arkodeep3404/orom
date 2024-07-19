@@ -1,8 +1,8 @@
-import { Popup } from "@/lib/dbSchema";
+import { popupModel } from "@/lib/dbSchema";
 import zod from "zod";
 import dbConnect from "@/lib/dbConnect";
 
-const popupsBody = zod.object({
+const createPopupBody = zod.object({
   popupName: zod.string(),
 });
 
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   const userId = req.headers.get("userId");
   const parsedBody = await req.json();
 
-  const { success } = popupsBody.safeParse(parsedBody);
+  const { success } = createPopupBody.safeParse(parsedBody);
   const { popupName } = parsedBody;
 
   console.log(parsedBody);
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const popup = await Popup.create({
+  const popup = await popupModel.create({
     userId: userId,
     popupName: popupName,
   });

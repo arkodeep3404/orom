@@ -1,4 +1,4 @@
-import { User } from "@/lib/dbSchema";
+import { userModel } from "@/lib/dbSchema";
 import zod from "zod";
 import dbConnect from "@/lib/dbConnect";
 import { sendLoginEmail } from "@/lib/sendEmail";
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const existingUser = await User.findOne({
+  const existingUser = await userModel.findOne({
     email: email,
   });
 
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
     .map(() => Math.random().toString(36)[2])
     .join("");
 
-  const user = await User.create({
+  const user = await userModel.create({
     email: email,
     firstName: firstName,
     lastName: lastName,
