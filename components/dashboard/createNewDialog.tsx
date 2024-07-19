@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useDashboardContent } from "@/lib/useDashboardContent";
+import useDashboardContent from "@/lib/useDashboardContent";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function CreateExistingDialog({
+export default function CreateNewDialog({
   trigger,
   service,
 }: {
@@ -27,6 +27,7 @@ export default function CreateExistingDialog({
   const setDashboardContent = useDashboardContent(service);
 
   async function createNewItem() {
+    console.log(service);
     if (newName.trim() === "") {
       toast("enter name to create");
     } else {
@@ -41,8 +42,8 @@ export default function CreateExistingDialog({
       toast(response1.data.message);
 
       if (setDashboardContent !== null) {
-        const response2 = await axios.get("/api/dashboard/popup");
-        setDashboardContent(response2.data.popups);
+        const response2 = await axios.get(`/api/dashboard/${service}`);
+        setDashboardContent(response2.data[service]);
       } else {
         toast("service not found");
       }

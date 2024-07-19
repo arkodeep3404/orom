@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import ExistingListCard from "@/components/dashboard/existingListCard";
-import CreateExistingDialog from "@/components/dashboard/createNewDialog";
+import CreateNewDialog from "@/components/dashboard/createNewDialog";
 import { popupsList } from "@/store/atoms";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
@@ -13,7 +13,7 @@ export default function PopupDashboard() {
   const [popupsListContent, setPopupsListContent] = useRecoilState(popupsList);
 
   async function fetchPopups() {
-    const response = await axios.get("/api/dashboard/popup");
+    const response = await axios.get("/api/dashboard/popups");
     setPopupsListContent(response.data.popups);
   }
 
@@ -24,9 +24,9 @@ export default function PopupDashboard() {
   return (
     <div>
       <div className="flex w-[calc(100vw-5rem)] justify-end m-10">
-        <CreateExistingDialog
+        <CreateNewDialog
           trigger={<Button> Create new </Button>}
-          service="popup"
+          service="popups"
         />
       </div>
 

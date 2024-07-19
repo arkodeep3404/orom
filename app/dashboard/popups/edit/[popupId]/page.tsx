@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import AddPopupDetailsCard from "@/components/dashboard/popup/addPopupDetailsCard";
+import AddPopupDetailsCard from "@/components/dashboard/popups/addPopupDetailsCard";
 import { useRecoilState } from "recoil";
 import { popupState, showSaveButton } from "@/store/atoms";
 import axios from "axios";
@@ -24,7 +24,7 @@ export default function PopupEditor() {
     useRecoilState(showSaveButton);
 
   async function fetchPopupCards() {
-    const response = await axios.get("/api/dashboard/popup/getExisting", {
+    const response = await axios.get("/api/dashboard/popups/getExisting", {
       headers: { popupId: params.popupId },
     });
 
@@ -65,7 +65,7 @@ export default function PopupEditor() {
     }
 
     axios
-      .post("/api/dashboard/popup/editExisting", {
+      .post("/api/dashboard/popups/editExisting", {
         popupId: params.popupId,
         popupDetails: popupCardsContent,
       })

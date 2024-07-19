@@ -1,10 +1,10 @@
 import { popupsList } from "@/store/atoms";
 import { useSetRecoilState } from "recoil";
 
-export function useDashboardContent(service: string) {
+export default function useDashboardContent(service: string) {
   const setPopupsDashboardContent = useSetRecoilState(popupsList);
 
-  if (service === "popup") {
+  if (service === "popups") {
     return setPopupsDashboardContent;
   }
 
