@@ -8,11 +8,7 @@ const signinBody = zod.object({
 });
 
 export async function POST(req: Request) {
-  await dbConnect();
   const parsedBody = await req.json();
-  const origin = req.headers.get("origin") || "";
-
-  const { email } = parsedBody;
   const { success } = signinBody.safeParse(parsedBody);
 
   if (!success) {
@@ -23,6 +19,10 @@ export async function POST(req: Request) {
       { status: 411 }
     );
   }
+
+  await dbConnect();
+  const origin = req.headers.get("origin") || "";
+  const { email } = parsedBody;
 
   const token = [...Array(10)]
     .map(() => Math.random().toString(36)[2])

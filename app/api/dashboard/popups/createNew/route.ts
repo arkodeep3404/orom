@@ -18,11 +18,8 @@ export async function POST(req: Request) {
     );
   }
 
-  await dbConnect();
   const parsedBody = await req.json();
-
   const { success } = createPopupBody.safeParse(parsedBody);
-  const { popupsName } = parsedBody;
 
   if (!success) {
     return Response.json(
@@ -32,6 +29,9 @@ export async function POST(req: Request) {
       { status: 411 }
     );
   }
+
+  await dbConnect();
+  const { popupsName } = parsedBody;
 
   const popup = await popupModel.create({
     userId: userId,

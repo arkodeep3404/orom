@@ -10,12 +10,8 @@ const signupBody = zod.object({
 });
 
 export async function POST(req: Request) {
-  await dbConnect();
-  const origin = req.headers.get("origin") || "";
   const parsedBody = await req.json();
-
   const { success } = signupBody.safeParse(parsedBody);
-  const { firstName, lastName, email } = parsedBody;
 
   if (!success) {
     return Response.json(
@@ -25,6 +21,10 @@ export async function POST(req: Request) {
       { status: 411 }
     );
   }
+
+  await dbConnect();
+  const { firstName, lastName, email } = parsedBody;
+  const origin = req.headers.get("origin") || "";
 
   const existingUser = await userModel.findOne({
     email: email,

@@ -7,6 +7,7 @@ import { useSetRecoilState } from "recoil";
 import { popupState, showSaveButton } from "@/store/atoms";
 import { PopupDetailsType } from "@/lib/dbSchema";
 import mongoose from "mongoose";
+import { toast } from "sonner";
 
 export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
   const setPopupCardsContent = useSetRecoilState(popupState);
@@ -17,22 +18,28 @@ export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
     field: string,
     value: string | number | any
   ) {
-    setPopupCardsContent((prevContent) =>
-      prevContent.map((cardData) => {
-        if (cardData._id === _id) {
-          return {
-            ...cardData,
-            [field]:
-              field === "duration" || field === "start"
-                ? Number(value)
-                : value.trim(),
-          };
-        }
-        return cardData;
-      })
-    );
-
-    setSaveButtonStatus(true);
+    if (
+      (field === "duration" && isNaN(value)) ||
+      (field === "start" && isNaN(value))
+    ) {
+      toast("enter a valid number");
+    } else {
+      setPopupCardsContent((prevContent) =>
+        prevContent.map((cardData) => {
+          if (cardData._id === _id) {
+            return {
+              ...cardData,
+              [field]:
+                field === "duration" || field === "start"
+                  ? Number(value)
+                  : value.trim(),
+            };
+          }
+          return cardData;
+        })
+      );
+      setSaveButtonStatus(true);
+    }
   }
 
   return (

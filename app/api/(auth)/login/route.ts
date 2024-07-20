@@ -9,10 +9,7 @@ const signinBody = zod.object({
 });
 
 export async function POST(req: Request) {
-  await dbConnect();
   const parsedBody = await req.json();
-
-  const { token } = parsedBody;
   const { success } = signinBody.safeParse(parsedBody);
 
   if (!success) {
@@ -23,6 +20,9 @@ export async function POST(req: Request) {
       { status: 411 }
     );
   }
+
+  await dbConnect();
+  const { token } = parsedBody;
 
   const user = await userModel.findOneAndUpdate(
     {

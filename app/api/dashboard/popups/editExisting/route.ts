@@ -27,11 +27,8 @@ export async function POST(req: Request) {
     );
   }
 
-  await dbConnect();
   const parsedBody = await req.json();
-
   const { success } = popupsBody.safeParse(parsedBody);
-  const { popupId, popupDetails } = parsedBody;
 
   if (!success) {
     return Response.json(
@@ -41,6 +38,9 @@ export async function POST(req: Request) {
       { status: 411 }
     );
   }
+
+  await dbConnect();
+  const { popupId, popupDetails } = parsedBody;
 
   const existingPopup = await popupModel.findOneAndUpdate(
     {

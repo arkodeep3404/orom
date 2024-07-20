@@ -4,8 +4,8 @@ module.exports = {
   mode: "production",
   entry: "./lib/popupScript/popupScript.jsx",
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, "public/js"),
+    filename: "script.js",
   },
   resolve: {
     extensions: [".js", ".jsx"],
