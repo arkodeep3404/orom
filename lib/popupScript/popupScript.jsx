@@ -1,41 +1,34 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { toast, Toaster } from "sonner";
 
-const userId = document.currentScript.getAttribute("userId");
 const popupId = document.currentScript.getAttribute("popupId");
-const endpoint =
-  location?.hostname === "orom.club"
-    ? "https://orom.club/api/script"
-    : "http://localhost:3000/api/script";
+const origin = document.currentScript.getAttribute("origin");
 
 function PopUp() {
-  fetch(endpoint, {
+  fetch(`${origin}/api/script`, {
     method: "GET",
     headers: {
-      userId: userId,
       popupId: popupId,
     },
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.displayPopup.popupDetails);
+      const popupDetails = data.displayPopup.popupDetails;
+      popupDetails.map((details) => {
+        setTimeout(() => {
+          toast(details.title, {
+            description: details.description,
+            duration: details.duration * 1000,
+          });
+        }, details.start * 1000);
+      });
     })
     .catch((error) => {
       console.error(error);
     });
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      toast("hello there");
-      toast("hello there 2");
-      toast("hello there 3");
-    }, 2500);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  return <Toaster />;
+  return <Toaster position="top-right" expand />;
 }
 
 const rootElement = document.createElement("div");

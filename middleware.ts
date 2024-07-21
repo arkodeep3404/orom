@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
-import { toast } from "sonner";
 
 export default async function middleware(request: NextRequest) {
   const token = cookies().get("orom_auth")?.value || "";
@@ -17,7 +16,12 @@ export default async function middleware(request: NextRequest) {
       response.headers.set("userId", decoded.payload.jti);
     } catch (error) {
       console.log(error);
-      toast("something went wrong. please try again");
+      return NextResponse.json(
+        {
+          message: "something went wrong. please try again",
+        },
+        { status: 500 }
+      );
     }
   }
 

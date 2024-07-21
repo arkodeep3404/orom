@@ -3,12 +3,9 @@ import dbConnect from "@/lib/dbConnect";
 
 export async function GET(req: Request) {
   await dbConnect();
-
-  const userId = req.headers.get("userId");
   const popupId = req.headers.get("popupId");
 
   const displayPopup = await popupModel.findOne({
-    userId: userId,
     _id: popupId,
   });
 

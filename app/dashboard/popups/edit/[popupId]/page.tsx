@@ -78,6 +78,13 @@ export default function PopupEditor() {
     setSaveButtonStatus(false);
   }
 
+  function copyScript() {
+    const script = `<script defer popupId="${params.popupId}" origin="${location.origin}" src="${location.origin}/js/script.js"></script>`;
+
+    navigator.clipboard.writeText(script);
+    toast("script copied");
+  }
+
   return (
     <div className="flex flex-col w-screen items-center gap-5 mt-10 ">
       <Card className="w-1/2 text-center">
@@ -88,11 +95,13 @@ export default function PopupEditor() {
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-evenly">
-          <Button onClick={addPopupCards}>Add new</Button>
+          <Button onClick={addPopupCards}>Add New</Button>
 
           <Button onClick={savePopupCards} disabled={!saveButtonStatus}>
             Save
           </Button>
+
+          <Button onClick={copyScript}>Copy Script</Button>
         </CardFooter>
       </Card>
 
