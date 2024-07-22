@@ -1,6 +1,15 @@
 export default function WaitlistPage() {}
 
+// aceternity ui
+
 // Aurora Background
 // Typewriter Effect
-// Moving Border, Placeholders And Vanish Input
+// Placeholders And Vanish Input
 // Animated Tooltip
+
+// magic ui
+
+// Sparkles Text
+// Cool Mode
+// Border Beam
+// Confetti
