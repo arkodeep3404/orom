@@ -9,34 +9,15 @@ import {
 
 export default function EmailEditor() {
   const words = [
-    {
-      text: "Share",
-    },
-    {
-      text: "your",
-    },
-    {
-      text: "waitlist",
-    },
-    {
-      text: "and",
-    },
-    {
-      text: "get",
-    },
-    {
-      text: "customers",
-      className: "text-blue-500 dark:text-blue-500",
-    },
-    {
-      text: "even",
-    },
-    {
-      text: "before",
-    },
-    {
-      text: "launching.",
-    },
+    "Share",
+    "your",
+    "waitlist",
+    "and",
+    "get",
+    "customers",
+    "even",
+    "before",
+    "launching.",
   ];
 
   const socials = [

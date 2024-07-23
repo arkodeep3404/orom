@@ -9,20 +9,12 @@ export const TypewriterEffect = ({
   className,
   cursorClassName,
 }: {
-  words: {
-    text: string;
-    className?: string;
-  }[];
+  words: string[];
   className?: string;
   cursorClassName?: string;
 }) => {
   // split text inside of words into array of characters
-  const wordsArray = words.map((word) => {
-    return {
-      ...word,
-      text: word.text.split(""),
-    };
-  });
+  const wordsArray = words.map((word) => word.split(""));
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
@@ -50,14 +42,11 @@ export const TypewriterEffect = ({
         {wordsArray.map((word, idx) => {
           return (
             <div key={`word-${idx}`} className="inline-block">
-              {word.text.map((char, index) => (
+              {word.map((char, index) => (
                 <motion.span
                   initial={{}}
                   key={`char-${index}`}
-                  className={cn(
-                    `dark:text-white text-black opacity-0 hidden`,
-                    word.className
-                  )}
+                  className={cn(`dark:text-white text-black opacity-0 hidden`)}
                 >
                   {char}
                 </motion.span>
@@ -103,30 +92,22 @@ export const TypewriterEffectSmooth = ({
   className,
   cursorClassName,
 }: {
-  words: {
-    text: string;
-    className?: string;
-  }[];
+  words: string[];
   className?: string;
   cursorClassName?: string;
 }) => {
   // split text inside of words into array of characters
-  const wordsArray = words.map((word) => {
-    return {
-      ...word,
-      text: word.text.split(""),
-    };
-  });
+  const wordsArray = words.map((word) => word.split(""));
   const renderWords = () => {
     return (
       <div>
         {wordsArray.map((word, idx) => {
           return (
             <div key={`word-${idx}`} className="inline-block">
-              {word.text.map((char, index) => (
+              {word.map((char, index) => (
                 <span
                   key={`char-${index}`}
-                  className={cn(`dark:text-white text-black `, word.className)}
+                  className={cn(`dark:text-white text-black `)}
                 >
                   {char}
                 </span>
