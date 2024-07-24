@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/card";
 import PopupDetailsCard from "@/components/dashboard/popups/popupDetailsCard";
 import { useRecoilState } from "recoil";
-import { popupState, showSaveButton } from "@/store/atoms";
+import { popupState } from "@/lib/stateStore/popupsState";
+import { showSaveButton } from "@/lib/stateStore/globalState";
 import axios from "axios";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
@@ -79,7 +80,7 @@ export default function PopupEditor() {
   }
 
   function copyScript() {
-    const script = `<script defer popupId="${params.popupId}" origin="${location.origin}" src="${location.origin}/js/script.js"></script>`;
+    const script = `<script defer popupId="${params.popupId}" origin="${location.origin}" src="${location.origin}/scripts/popupScript/script.js"></script>`;
 
     navigator.clipboard.writeText(script);
     toast("script copied");

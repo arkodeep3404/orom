@@ -8,17 +8,7 @@ import {
 } from "@tabler/icons-react";
 
 export default function EmailEditor() {
-  const words = [
-    "Share",
-    "your",
-    "waitlist",
-    "and",
-    "get",
-    "customers",
-    "even",
-    "before",
-    "launching.",
-  ];
+  const words = "Share your waitlist and get customers even before launching.";
 
   const socials = [
     {

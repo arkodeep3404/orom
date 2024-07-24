@@ -1,4 +1,4 @@
-import { popupsList } from "@/store/atoms";
+import { popupsList } from "@/lib/stateStore/popupsState";
 import { useSetRecoilState } from "recoil";
 
 export default function useDashboardContent(service: string) {

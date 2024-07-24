@@ -1,4 +1,4 @@
-import { popupModel } from "@/lib/dbSchema";
+import popupModel from "@/lib/dbSchemas/popupSchema";
 import dbConnect from "@/lib/dbConnect";
 
 export async function GET(req: Request) {

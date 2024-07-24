@@ -1,4 +1,4 @@
-import { popupModel } from "@/lib/dbSchema";
+import popupModel from "@/lib/dbSchemas/popupSchema";
 import zod from "zod";
 import dbConnect from "@/lib/dbConnect";
 

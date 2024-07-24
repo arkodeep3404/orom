@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import ExistingListCard from "@/components/dashboard/existingListCard";
 import CreateNewDialog from "@/components/dashboard/createNewDialog";
-import { popupsList } from "@/store/atoms";
+import { popupsList } from "@/lib/stateStore/popupsState";
 import { useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";

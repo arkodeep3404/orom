@@ -22,7 +22,7 @@ export default function ShareWaitlistPage({
   words,
   socials,
 }: {
-  words: Array<string>;
+  words: string;
   socials: Array<socialsType>;
 }) {
   const [email, setEmail] = useState("");

@@ -9,12 +9,12 @@ export const TypewriterEffect = ({
   className,
   cursorClassName,
 }: {
-  words: string[];
+  words: string;
   className?: string;
   cursorClassName?: string;
 }) => {
   // split text inside of words into array of characters
-  const wordsArray = words.map((word) => word.split(""));
+  const wordsArray = words.split(" ").map((word) => word.split(""));
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
@@ -92,12 +92,12 @@ export const TypewriterEffectSmooth = ({
   className,
   cursorClassName,
 }: {
-  words: string[];
+  words: string;
   className?: string;
   cursorClassName?: string;
 }) => {
   // split text inside of words into array of characters
-  const wordsArray = words.map((word) => word.split(""));
+  const wordsArray = words.split(" ").map((word) => word.split(""));
   const renderWords = () => {
     return (
       <div>

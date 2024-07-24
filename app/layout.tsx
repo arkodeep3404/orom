@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-import RecoilContextProvider from "@/store/atoms";
+import RecoilContextProvider from "@/lib/stateStore/globalState";
 
 const inter = Inter({ subsets: ["latin"] });
 

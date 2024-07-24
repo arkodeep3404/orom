@@ -4,8 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSetRecoilState } from "recoil";
-import { popupState, showSaveButton } from "@/store/atoms";
-import { PopupDetailsType } from "@/lib/dbSchema";
+import { popupState } from "@/lib/stateStore/popupsState";
+import { showSaveButton } from "@/lib/stateStore/globalState";
+import { PopupDetailsType } from "@/lib/dbSchemas/popupSchema";
 import mongoose from "mongoose";
 import { toast } from "sonner";
 
