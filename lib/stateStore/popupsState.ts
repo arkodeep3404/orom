@@ -10,3 +10,8 @@ export const popupsList = atom<Array<PopupSchema>>({
   key: "popupsList",
   default: [],
 });
+
+export const showPopupsSaveButton = atom<boolean>({
+  key: "popupsSaveButton",
+  default: false,
+});

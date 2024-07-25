@@ -1,11 +1,6 @@
 "use client";
 
-import { RecoilRoot, atom } from "recoil";
-
-export const showSaveButton = atom<boolean>({
-  key: "saveButton",
-  default: false,
-});
+import { RecoilRoot } from "recoil";
 
 export default function RecoilContextProvider({
   children,

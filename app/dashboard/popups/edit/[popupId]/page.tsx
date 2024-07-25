@@ -11,7 +11,7 @@ import {
 import PopupDetailsCard from "@/components/dashboard/popups/popupDetailsCard";
 import { useRecoilState } from "recoil";
 import { popupState } from "@/lib/stateStore/popupsState";
-import { showSaveButton } from "@/lib/stateStore/globalState";
+import { showPopupsSaveButton } from "@/lib/stateStore/popupsState";
 import axios from "axios";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
@@ -22,7 +22,7 @@ export default function PopupEditor() {
   const params = useParams();
   const [popupCardsContent, setPopupCardsContent] = useRecoilState(popupState);
   const [saveButtonStatus, setSaveButtonStatus] =
-    useRecoilState(showSaveButton);
+    useRecoilState(showPopupsSaveButton);
 
   async function fetchPopupCards() {
     const response = await axios.get("/api/dashboard/popups/getExisting", {

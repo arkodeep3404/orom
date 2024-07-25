@@ -5,14 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSetRecoilState } from "recoil";
 import { popupState } from "@/lib/stateStore/popupsState";
-import { showSaveButton } from "@/lib/stateStore/globalState";
+import { showPopupsSaveButton } from "@/lib/stateStore/popupsState";
 import { PopupDetailsType } from "@/lib/dbSchemas/popupSchema";
 import mongoose from "mongoose";
 import { toast } from "sonner";
 
 export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
   const setPopupCardsContent = useSetRecoilState(popupState);
-  const setSaveButtonStatus = useSetRecoilState(showSaveButton);
+  const setSaveButtonStatus = useSetRecoilState(showPopupsSaveButton);
 
   function updatePopupCards(
     _id: mongoose.Types.ObjectId,
