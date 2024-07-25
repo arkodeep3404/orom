@@ -1,12 +1,33 @@
-import { WaitlistSchema } from "@/lib/dbSchemas/waitlistSchema";
+import { SocialUrlsType, WaitlistSchema } from "@/lib/dbSchemas/waitlistSchema";
 import { atom } from "recoil";
+
+export interface InitialWaitlistSchema {
+  waitlistTitle: string;
+  waitlistDescription: string;
+  socialUrls: SocialUrlsType;
+}
 
 export const waitlistsList = atom<Array<WaitlistSchema>>({
   key: "waitlistsList",
   default: [],
 });
 
+export const waitlistsDetailState = atom<InitialWaitlistSchema>({
+  key: "waitlistsDetailState",
+  default: {
+    waitlistTitle: "",
+    waitlistDescription: "",
+    socialUrls: {
+      FacebookUrl: "",
+      InstagramUrl: "",
+      XUrl: "",
+      YouTubeUrl: "",
+      LinkedInUrl: "",
+    },
+  },
+});
+
 export const showWaitlistsSaveButton = atom<boolean>({
-  key: "waitlistsSaveButton",
+  key: "showWaitlistsSaveButton",
   default: false,
 });

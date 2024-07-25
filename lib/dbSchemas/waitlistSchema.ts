@@ -52,17 +52,18 @@ const WaitlistSchema: Schema<WaitlistSchema> = new Schema({
   },
   waitlistTitle: {
     type: String,
-    required: [true, "Title is required"],
+    required: false,
     default: "",
   },
   waitlistDescription: {
     type: String,
-    required: [true, "Description is required"],
+    required: false,
     default: "",
   },
   socialUrls: {
     type: SocialUrlsTypeSchema,
     required: false,
+    default: {},
   },
   waitlistEmails: {
     type: [String],

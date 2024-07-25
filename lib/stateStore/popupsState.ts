@@ -1,8 +1,8 @@
 import { PopupDetailsType, PopupSchema } from "@/lib/dbSchemas/popupSchema";
 import { atom } from "recoil";
 
-export const popupState = atom<PopupDetailsType[]>({
-  key: "popupState",
+export const popupsDetailState = atom<PopupDetailsType[]>({
+  key: "popupsDetailState",
   default: [],
 });
 
@@ -12,6 +12,6 @@ export const popupsList = atom<Array<PopupSchema>>({
 });
 
 export const showPopupsSaveButton = atom<boolean>({
-  key: "popupsSaveButton",
+  key: "showPopupsSaveButton",
   default: false,
 });

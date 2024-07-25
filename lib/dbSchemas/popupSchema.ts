@@ -2,10 +2,10 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface PopupDetailsType {
   _id: mongoose.Types.ObjectId;
-  title: string;
-  description: string;
-  duration: number;
-  start: number;
+  popupTitle: string;
+  popupDescription: string;
+  popupDuration: number;
+  popupStart: number;
 }
 
 export interface PopupSchema extends Document {
@@ -15,10 +15,14 @@ export interface PopupSchema extends Document {
 }
 
 export const PopupDetailsTypeSchema: Schema<PopupDetailsType> = new Schema({
-  title: { type: String, required: [true, "Title is required"] },
-  description: { type: String, required: [true, "Description is required"] },
-  duration: { type: Number, required: [true, "Duration is required"] },
-  start: { type: Number, required: [true, "Start is required"] },
+  _id: { type: Schema.Types.ObjectId, required: [true, "_id is required"] },
+  popupTitle: { type: String, required: [true, "Title is required"] },
+  popupDescription: {
+    type: String,
+    required: [true, "Description is required"],
+  },
+  popupDuration: { type: Number, required: [true, "Duration is required"] },
+  popupStart: { type: Number, required: [true, "Start is required"] },
 });
 
 const PopupSchema: Schema<PopupSchema> = new Schema({

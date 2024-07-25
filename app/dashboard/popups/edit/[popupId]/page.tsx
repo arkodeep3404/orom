@@ -9,19 +9,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import PopupDetailsCard from "@/components/dashboard/popups/popupDetailsCard";
-import { useRecoilState } from "recoil";
-import { popupState } from "@/lib/stateStore/popupsState";
-import { showPopupsSaveButton } from "@/lib/stateStore/popupsState";
+import {
+  popupsDetailState,
+  showPopupsSaveButton,
+} from "@/lib/stateStore/popupsState";
 import axios from "axios";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import mongoose from "mongoose";
+import { useRecoilState } from "recoil";
 
 export default function PopupEditor() {
   const params = useParams();
-  const [popupCardsContent, setPopupCardsContent] = useRecoilState(popupState);
-  const [saveButtonStatus, setSaveButtonStatus] =
+  const [popupCardsContent, setPopupCardsContent] =
+    useRecoilState(popupsDetailState);
+  const [savePopupsButtonStatus, setSavePopupsButtonStatus] =
     useRecoilState(showPopupsSaveButton);
 
   async function fetchPopupCards() {
@@ -41,10 +44,10 @@ export default function PopupEditor() {
       ...prevContent,
       {
         _id: new mongoose.Types.ObjectId(),
-        title: "",
-        description: "",
-        duration: 0,
-        start: 0,
+        popupTitle: "",
+        popupDescription: "",
+        popupDuration: 0,
+        popupStart: 0,
       },
     ]);
   }
@@ -52,10 +55,10 @@ export default function PopupEditor() {
   async function savePopupCards() {
     const isEmptyField = popupCardsContent.some((cardData) => {
       return (
-        cardData.title.trim() === "" ||
-        cardData.description.trim() === "" ||
-        cardData.duration === 0 ||
-        cardData.start === 0
+        cardData.popupTitle.trim() === "" ||
+        cardData.popupDescription.trim() === "" ||
+        cardData.popupDuration === 0 ||
+        cardData.popupStart === 0
       );
     });
 
@@ -76,7 +79,7 @@ export default function PopupEditor() {
         toast(error.response.data.message);
       });
 
-    setSaveButtonStatus(false);
+    setSavePopupsButtonStatus(false);
   }
 
   function copyScript() {
@@ -92,13 +95,13 @@ export default function PopupEditor() {
         <CardHeader>
           <CardTitle>Create pop-ups</CardTitle>
           <CardDescription>
-            Deploy your new project in one-click.
+            {"Copy & paste the script in the <head> of your website."}
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-evenly">
           <Button onClick={addPopupCards}>Add New</Button>
 
-          <Button onClick={savePopupCards} disabled={!saveButtonStatus}>
+          <Button onClick={savePopupCards} disabled={!savePopupsButtonStatus}>
             Save
           </Button>
 

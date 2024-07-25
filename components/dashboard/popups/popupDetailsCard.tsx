@@ -3,16 +3,18 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useSetRecoilState } from "recoil";
-import { popupState } from "@/lib/stateStore/popupsState";
-import { showPopupsSaveButton } from "@/lib/stateStore/popupsState";
+import {
+  popupsDetailState,
+  showPopupsSaveButton,
+} from "@/lib/stateStore/popupsState";
 import { PopupDetailsType } from "@/lib/dbSchemas/popupSchema";
 import mongoose from "mongoose";
 import { toast } from "sonner";
+import { useSetRecoilState } from "recoil";
 
 export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
-  const setPopupCardsContent = useSetRecoilState(popupState);
-  const setSaveButtonStatus = useSetRecoilState(showPopupsSaveButton);
+  const setPopupCardsContent = useSetRecoilState(popupsDetailState);
+  const setSavePopupsButtonStatus = useSetRecoilState(showPopupsSaveButton);
 
   function updatePopupCards(
     _id: mongoose.Types.ObjectId,
@@ -20,8 +22,8 @@ export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
     value: string | number | any
   ) {
     if (
-      (field === "duration" && isNaN(value)) ||
-      (field === "start" && isNaN(value))
+      (field === "popupDuration" && isNaN(value)) ||
+      (field === "popupStart" && isNaN(value))
     ) {
       toast("enter a valid number");
     } else {
@@ -31,7 +33,7 @@ export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
             return {
               ...cardData,
               [field]:
-                field === "duration" || field === "start"
+                field === "popupDuration" || field === "popupStart"
                   ? Number(value)
                   : value.trim(),
             };
@@ -39,7 +41,7 @@ export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
           return cardData;
         })
       );
-      setSaveButtonStatus(true);
+      setSavePopupsButtonStatus(true);
     }
   }
 
@@ -50,52 +52,56 @@ export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
           <div className="grid w-full items-center gap-4">
             <div className="grid grid-cols-2 gap-5">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="title">Title</Label>
+                <Label htmlFor="popupTitle">Title</Label>
                 <Input
-                  id="title"
+                  id="popupTitle"
                   placeholder="Title of pop-up"
                   onChange={(e) =>
-                    updatePopupCards(data._id, "title", e.target.value)
+                    updatePopupCards(data._id, "popupTitle", e.target.value)
                   }
-                  value={data.title}
+                  value={data.popupTitle}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="popupDescription">Description</Label>
                 <Input
-                  id="description"
+                  id="popupDescription"
                   placeholder="Description of pop-up"
                   onChange={(e) =>
-                    updatePopupCards(data._id, "description", e.target.value)
+                    updatePopupCards(
+                      data._id,
+                      "popupDescription",
+                      e.target.value
+                    )
                   }
-                  value={data.description}
+                  value={data.popupDescription}
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-5">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="duration">
+                <Label htmlFor="popupDuration">
                   Duration of display (in seconds)
                 </Label>
                 <Input
-                  id="duration"
+                  id="popupDuration"
                   placeholder="Duration of display of pop-up"
                   onChange={(e) =>
-                    updatePopupCards(data._id, "duration", e.target.value)
+                    updatePopupCards(data._id, "popupDuration", e.target.value)
                   }
-                  value={data.duration}
+                  value={data.popupDuration}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="start">Start time (in seconds)</Label>
+                <Label htmlFor="popupStart">Start time (in seconds)</Label>
                 <Input
-                  id="start"
+                  id="popupStart"
                   placeholder="Start time of pop-up"
                   onChange={(e) =>
-                    updatePopupCards(data._id, "start", e.target.value)
+                    updatePopupCards(data._id, "popupStart", e.target.value)
                   }
-                  value={data.start}
+                  value={data.popupStart}
                 />
               </div>
             </div>
