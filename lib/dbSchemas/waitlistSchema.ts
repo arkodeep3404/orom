@@ -8,7 +8,7 @@ export interface SocialUrlsType {
   LinkedInUrl: string;
 }
 
-export interface WaitlistSchema extends Document {
+export interface WaitlistSchema {
   userId: mongoose.Types.ObjectId;
   waitlistName: string;
   waitlistTitle: string;

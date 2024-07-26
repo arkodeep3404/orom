@@ -63,20 +63,20 @@ export default function WaitlistEditor() {
     setSaveWaitlistButtonStatus(false);
   }
 
-  function copyScript() {
-    const script = `<script defer popupId="${params.popupId}" origin="${location.origin}" src="${location.origin}/scripts/popupScript/script.js"></script>`;
+  function copyLink() {
+    const link = `${location.origin}/share/waitlists/${params.waitlistId}`;
 
-    navigator.clipboard.writeText(script);
-    toast("script copied");
+    navigator.clipboard.writeText(link);
+    toast("link copied");
   }
 
   return (
     <div className="flex flex-col w-screen items-center gap-5 mt-10 ">
       <Card className="w-1/2 text-center">
         <CardHeader>
-          <CardTitle>Create pop-ups</CardTitle>
+          <CardTitle>Create Waitlists</CardTitle>
           <CardDescription>
-            {"Copy & paste the script in the <head> of your website."}
+            Copy & Share the link for your waitlist.
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-evenly">
@@ -87,7 +87,7 @@ export default function WaitlistEditor() {
             Save
           </Button>
 
-          <Button onClick={copyScript}>Copy Script</Button>
+          <Button onClick={copyLink}>Copy Link</Button>
         </CardFooter>
       </Card>
 

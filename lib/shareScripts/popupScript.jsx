@@ -6,7 +6,7 @@ const popupId = document.currentScript.getAttribute("popupId");
 const origin = document.currentScript.getAttribute("origin");
 
 function PopUp() {
-  fetch(`${origin}/api/scripts/popupScript`, {
+  fetch(`${origin}/api/shareScripts/popupScript`, {
     method: "GET",
     headers: {
       popupId: popupId,

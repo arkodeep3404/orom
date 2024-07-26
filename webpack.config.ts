@@ -2,9 +2,9 @@ const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./lib/scripts/popupScript.jsx",
+  entry: "./lib/shareScripts/popupScript.jsx",
   output: {
-    path: path.resolve(__dirname, "public/scripts/popupScript"),
+    path: path.resolve(__dirname, "public/shareScripts/popupScript"),
     filename: "script.js",
   },
   resolve: {

@@ -35,7 +35,7 @@ export default function PopupDetailsCard({ data }: { data: PopupDetailsType }) {
               [field]:
                 field === "popupDuration" || field === "popupStart"
                   ? Number(value)
-                  : value.trim(),
+                  : value,
             };
           }
           return cardData;

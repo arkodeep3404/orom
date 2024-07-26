@@ -23,14 +23,14 @@ export default function WaitlistDetailsCard({
       if (field === "waitlistTitle" || field === "waitlistDescription") {
         return {
           ...prevContent,
-          [field]: value.trim(),
+          [field]: value,
         };
       } else if (field in prevContent.socialUrls) {
         return {
           ...prevContent,
           socialUrls: {
             ...prevContent.socialUrls,
-            [field]: value.trim(),
+            [field]: value,
           },
         };
       }

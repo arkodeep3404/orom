@@ -10,6 +10,7 @@ import { CoolMode } from "@/components/magicui/cool-mode";
 import { TriggerSideCannons } from "@/components/magicui/confetti-sideCannons";
 import { Button } from "@/components/ui/button";
 import { ReactElement, useState } from "react";
+import { toast } from "sonner";
 
 interface socialsType {
   id: number;
@@ -19,26 +20,29 @@ interface socialsType {
 }
 
 export default function ShareWaitlistPage({
-  words,
+  title,
+  description,
   socials,
 }: {
-  words: string;
+  title: string;
+  description: string;
   socials: Array<socialsType>;
 }) {
   const [email, setEmail] = useState("");
 
   function submit() {
-    TriggerSideCannons();
+    if (email.trim() === "") {
+      toast("please enter your email");
+    } else {
+      TriggerSideCannons();
+    }
   }
 
   return (
     <AuroraBackground className="justify-evenly relative">
       <div className="flex flex-col items-center text-center">
-        <SparklesText
-          text="Create and share your waitlist today"
-          className="font-normal"
-        />
-        <TypewriterEffectSmooth words={words} />
+        <SparklesText text={title} className="font-normal" />
+        {description !== "" && <TypewriterEffectSmooth words={description} />}
       </div>
 
       <PlaceholdersAndVanishInput
