@@ -83,7 +83,7 @@ export default function PopupEditor() {
   }
 
   function copyScript() {
-    const script = `<script defer popupId="${params.popupId}" origin="${location.origin}" src="${location.origin}/scripts/popupScript/script.js"></script>`;
+    const script = `<script defer popupId="${params.popupId}" origin="${location.origin}" src="${location.origin}/shareScripts/popupScript/script.js"></script>`;
 
     navigator.clipboard.writeText(script);
     toast("script copied");

@@ -5,6 +5,7 @@ export interface InitialWaitlistSchema {
   waitlistTitle: string;
   waitlistDescription: string;
   socialUrls: SocialUrlsType;
+  waitlistEmails: string[];
 }
 
 export const waitlistsList = atom<Array<WaitlistSchema>>({
@@ -24,6 +25,7 @@ export const waitlistsDetailState = atom<InitialWaitlistSchema>({
       YouTubeUrl: "",
       LinkedInUrl: "",
     },
+    waitlistEmails: [""],
   },
 });
 

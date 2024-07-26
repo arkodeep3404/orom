@@ -8,6 +8,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import WaitlistDetailsCard from "@/components/dashboard/waitlists/waitlistDetailsCard";
 import {
   waitlistsDetailState,
@@ -71,27 +81,57 @@ export default function WaitlistEditor() {
   }
 
   return (
-    <div className="flex flex-col w-screen items-center gap-5 mt-10 ">
-      <Card className="w-1/2 text-center">
-        <CardHeader>
-          <CardTitle>Create Waitlists</CardTitle>
-          <CardDescription>
-            Copy & Share the link for your waitlist.
-          </CardDescription>
-        </CardHeader>
-        <CardFooter className="flex justify-evenly">
-          <Button
-            onClick={saveWaitlistCard}
-            disabled={!saveWaitlistButtonStatus}
-          >
-            Save
-          </Button>
+    <div>
+      <div className="flex flex-col items-center gap-5 mt-10">
+        <Card className="w-1/2 text-center">
+          <CardHeader>
+            <CardTitle>Create Waitlists</CardTitle>
+            <CardDescription>
+              Copy & Share the link for your waitlist.
+            </CardDescription>
+          </CardHeader>
+          <CardFooter className="flex justify-evenly">
+            <Button
+              onClick={saveWaitlistCard}
+              disabled={!saveWaitlistButtonStatus}
+            >
+              Save
+            </Button>
 
-          <Button onClick={copyLink}>Copy Link</Button>
-        </CardFooter>
-      </Card>
+            <Button onClick={copyLink}>Copy Link</Button>
+          </CardFooter>
+        </Card>
 
-      <WaitlistDetailsCard data={waitlistCardContent} />
+        <WaitlistDetailsCard data={waitlistCardContent} />
+      </div>
+
+      <div className="flex flex-col items-center mt-10 mb-10">
+        <div className="text-4xl text-black text-center font-semibold mb-5">
+          List of your waitlist emails
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-black font-semibold">Emails</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {waitlistCardContent.waitlistEmails.map((email) => (
+              <TableRow key={email}>
+                <TableCell className="font-semibold">{email}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell className="font-semibold">Total Emails</TableCell>
+              <TableCell className="font-semibold">
+                {waitlistCardContent.waitlistEmails.length}
+              </TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </div>
     </div>
   );
 }

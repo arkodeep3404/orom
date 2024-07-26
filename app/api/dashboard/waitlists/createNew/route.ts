@@ -1,4 +1,4 @@
-import WaitlistModel from "@/lib/dbSchemas/waitlistSchema";
+import waitlistModel from "@/lib/dbSchemas/waitlistSchema";
 import zod from "zod";
 import dbConnect from "@/lib/dbConnect";
 
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
   await dbConnect();
   const { waitlistsName } = parsedBody;
 
-  const waitlist = await WaitlistModel.create({
+  const waitlist = await waitlistModel.create({
     userId: userId,
     waitlistName: waitlistsName,
   });

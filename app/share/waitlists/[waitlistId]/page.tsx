@@ -86,6 +86,7 @@ export default function EmailEditor() {
 
   return (
     <ShareWaitlistPage
+      waitlistId={params.waitlistId}
       title={waitlistDetails.waitlistTitle}
       description={waitlistDetails.waitlistDescription}
       socials={socials.filter((social) => social.url !== "")}

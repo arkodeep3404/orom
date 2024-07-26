@@ -11,6 +11,7 @@ import { TriggerSideCannons } from "@/components/magicui/confetti-sideCannons";
 import { Button } from "@/components/ui/button";
 import { ReactElement, useState } from "react";
 import { toast } from "sonner";
+import axios from "axios";
 
 interface socialsType {
   id: number;
@@ -20,21 +21,33 @@ interface socialsType {
 }
 
 export default function ShareWaitlistPage({
+  waitlistId,
   title,
   description,
   socials,
 }: {
+  waitlistId: string | string[];
   title: string;
   description: string;
   socials: Array<socialsType>;
 }) {
-  const [email, setEmail] = useState("");
+  const [waitlistEmail, setWaitlistEmail] = useState("");
 
-  function submit() {
-    if (email.trim() === "") {
+  async function submitWaitlistEmail() {
+    if (waitlistEmail.trim() === "") {
       toast("please enter your email");
     } else {
-      TriggerSideCannons();
+      try {
+        const response = await axios.post("/api/shareScripts/waitlistScript", {
+          waitlistId: waitlistId,
+          waitlistEmail: waitlistEmail,
+        });
+
+        TriggerSideCannons();
+        toast(response.data.message);
+      } catch (error: any) {
+        toast(error.response.data.message);
+      }
     }
   }
 
@@ -47,8 +60,8 @@ export default function ShareWaitlistPage({
 
       <PlaceholdersAndVanishInput
         placeholders={["Enter your email to get juicy updates regularly"]}
-        onChange={(e) => setEmail(e.target.value)}
-        onSubmit={submit}
+        onChange={(e) => setWaitlistEmail(e.target.value)}
+        onSubmit={submitWaitlistEmail}
       />
 
       <div className="flex flex-row items-center justify-center w-full">

@@ -24,16 +24,16 @@ export default function DashboardServices() {
       link: "/dashboard/waitlists",
     },
     {
-      title: "Collect & display testimonials",
-      description: "Share what real users think.",
-      icon: <IconCaretLeftRight />,
-      link: "/dashboard/testimonials",
-    },
-    {
       title: "Show pop-ups to grab attention",
       description: "Turn visitors into paying customers.",
       icon: <IconChartBarPopular />,
       link: "/dashboard/popups",
+    },
+    {
+      title: "Collect & display testimonials",
+      description: "Share what real users think.",
+      icon: <IconCaretLeftRight />,
+      link: "/dashboard/testimonials",
     },
     {
       title: "Update your users daily",

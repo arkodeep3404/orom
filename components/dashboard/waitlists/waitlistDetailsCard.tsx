@@ -30,7 +30,7 @@ export default function WaitlistDetailsCard({
           ...prevContent,
           socialUrls: {
             ...prevContent.socialUrls,
-            [field]: value,
+            [field]: value.trim(),
           },
         };
       }
@@ -44,7 +44,7 @@ export default function WaitlistDetailsCard({
     <Card className="w-1/2">
       <CardContent>
         <form>
-          <div className="grid w-full items-center gap-4">
+          <div className="grid items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="title">Title</Label>
               <Input

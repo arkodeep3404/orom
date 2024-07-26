@@ -17,11 +17,11 @@ function PopUp() {
       const popupDetails = data.displayPopup.popupDetails;
       popupDetails.map((details) => {
         setTimeout(() => {
-          toast(details.title, {
-            description: details.description,
-            duration: details.duration * 1000,
+          toast(details.popupTitle, {
+            description: details.popupDescription,
+            duration: details.popupDuration * 1000,
           });
-        }, details.start * 1000);
+        }, details.popupStart * 1000);
       });
     })
     .catch((error) => {

@@ -1,4 +1,4 @@
-import WaitlistModel from "@/lib/dbSchemas/waitlistSchema";
+import waitlistModel from "@/lib/dbSchemas/waitlistSchema";
 import dbConnect from "@/lib/dbConnect";
 
 export async function GET(req: Request) {
@@ -15,7 +15,7 @@ export async function GET(req: Request) {
 
   await dbConnect();
 
-  const waitlists = await WaitlistModel.find({
+  const waitlists = await waitlistModel.find({
     userId: userId,
   });
 

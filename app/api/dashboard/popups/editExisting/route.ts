@@ -7,10 +7,10 @@ const popupsBody = zod.object({
   popupDetails: zod.array(
     zod.object({
       _id: zod.string(),
-      title: zod.string(),
-      description: zod.string(),
-      duration: zod.number(),
-      start: zod.number(),
+      popupTitle: zod.string(),
+      popupDescription: zod.string(),
+      popupDuration: zod.number(),
+      popupStart: zod.number(),
     })
   ),
 });
