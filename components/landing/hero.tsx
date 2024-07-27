@@ -50,14 +50,14 @@ export default function Hero() {
     console.log(values);
   }
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      toast("hello there");
-      toast("hello there 2");
-    });
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     toast("hello there");
+  //     toast("hello there 2");
+  //   });
 
-    return () => clearTimeout(timeout);
-  }, []);
+  //   return () => clearTimeout(timeout);
+  // }, []);
 
   return (
     <Section>
@@ -65,13 +65,14 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center">
           <h1 className="!mb-0">
             <Balancer>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Empower Your Business with Orom: The All-in-One Platform for
+              Outreach, Marketing, and Lead Management
             </Balancer>
           </h1>
           <h3 className="text-muted-foreground">
             <Balancer>
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Unify Your Outreach, Marketing, and Lead Management Efforts in One
+              Powerful Platform
             </Balancer>
           </h3>
           <Button
@@ -81,7 +82,7 @@ export default function Hero() {
             variant="outline"
           >
             <Link href="">
-              Lorem ipsum dolor sit amet <ArrowDown className="ml-2 w-4" />
+              Join 40+ people now <ArrowDown className="ml-2 w-4" />
             </Link>
           </Button>
           <Form {...form}>

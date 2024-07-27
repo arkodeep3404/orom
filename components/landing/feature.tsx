@@ -8,7 +8,20 @@ import Balancer from "react-wrap-balancer";
 import { Section, Container } from "@/components/craft";
 
 // Icon imports
-import { Coins, ArrowRight } from "lucide-react";
+import {
+  LoaderCircle,
+  PictureInPicture2,
+  UserRoundCheck,
+  Mails,
+  Newspaper,
+  Lightbulb,
+  PanelTop,
+  UsersRound,
+  BotMessageSquare,
+  AtSign,
+  HandCoins,
+  GalleryHorizontalEnd,
+} from "lucide-react";
 
 type FeatureText = {
   icon: JSX.Element;
@@ -20,35 +33,96 @@ type FeatureText = {
 
 const featureText: FeatureText[] = [
   {
-    icon: <Coins className="h-6 w-6" />,
-    title: "Lorem Ipsum",
+    icon: <LoaderCircle className="h-6 w-6" />,
+    title: "Custom Waitlists",
     href: "/",
     description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Create and manage waitlists easily. Integrate with your website or use as a standalone page.",
     cta: "Learn More",
   },
   {
-    icon: <Coins className="h-6 w-6" />,
-    title: "Lorem Ipsum",
+    icon: <PictureInPicture2 className="h-6 w-6" />,
+    title: "Custom Popup",
     href: "/",
     description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Create website popups with customizable content, timing, and display rules.",
     cta: "Learn More",
   },
   {
-    icon: <Coins className="h-6 w-6" />,
-    title: "Lorem Ipsum",
+    icon: <UserRoundCheck className="h-6 w-6" />,
+    title: "Testimonial Collection",
     href: "/",
     description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Gather and display customer testimonials. Customizable forms and display options available.",
+    cta: "Learn More",
+  },
+
+  {
+    icon: <Mails className="h-6 w-6" />,
+    title: "Newsletter Creator",
+    href: "/",
+    description:
+      "Design newsletters, manage subscribers, and send campaigns. Integrates with AWS SES.",
     cta: "Learn More",
   },
   {
-    icon: <Coins className="h-6 w-6" />,
-    title: "Lorem Ipsum",
+    icon: <Newspaper className="h-6 w-6" />,
+    title: "Blog Platform",
     href: "/",
     description:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Write and publish blogs using MDX or import from Google Docs. Easy to integrate with your site.",
+    cta: "Learn More",
+  },
+  {
+    icon: <Lightbulb className="h-6 w-6" />,
+    title: "Feedback and Ideas",
+    href: "/",
+    description:
+      "Collect user feedback and feature ideas. Users can upvote and discuss suggestions.",
+    cta: "Learn More",
+  },
+  {
+    icon: <PanelTop className="h-6 w-6" />,
+    title: "No-Code Website Builder",
+    href: "/",
+    description: "Build websites easily without coding knowledge.",
+    cta: "Learn More",
+  },
+  {
+    icon: <UsersRound className="h-6 w-6" />,
+    title: "Team Workspace",
+    href: "/",
+    description: "Invite team members to collaborate on tasks and projects.",
+    cta: "Learn More",
+  },
+  {
+    icon: <BotMessageSquare className="h-6 w-6" />,
+    title: "AI Chatbot Creator",
+    href: "/",
+    description: "Build and deploy AI-powered chatbots for your website.",
+    cta: "Learn More",
+  },
+  {
+    icon: <AtSign className="h-6 w-6" />,
+    title: "Social Media Content Creator",
+    href: "/",
+    description:
+      "Design posts and create content for social media platforms easily.",
+    cta: "Learn More",
+  },
+  {
+    icon: <HandCoins className="h-6 w-6" />,
+    title: "Idea Sharing",
+    href: "/",
+    description:
+      "Platform for users to share, upvote, and discuss ideas for new projects or products.",
+    cta: "Learn More",
+  },
+  {
+    icon: <GalleryHorizontalEnd className="h-6 w-6" />,
+    title: "Coming Soon",
+    href: "/",
+    description: "More amazing tools on the horizon. Stay tuned for updates!",
     cta: "Learn More",
   },
 ];
@@ -60,12 +134,14 @@ const Feature = () => {
         <div className="flex flex-col gap-6">
           <h3 className="text-4xl">
             <Balancer>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Explore Orom&apos;s Comprehensive Features to Transform Your
+              Business
             </Balancer>
           </h3>
           <h4 className="text-2xl font-light opacity-70">
             <Balancer>
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+              Unleash Your Business Potential: One Platform, Endless
+              Possibilities
             </Balancer>
           </h4>
 
@@ -82,11 +158,11 @@ const Feature = () => {
                     <h4 className="text-xl text-primary">{title}</h4>
                     <p className="text-base opacity-75">{description}</p>
                   </div>
-                  {cta && (
+                  {/* {cta && (
                     <div className="flex h-fit items-center text-sm font-semibold">
                       <p>{cta}</p> <ArrowRight className="ml-2 h-4 w-4" />
                     </div>
-                  )}
+                  )} */}
                 </Link>
               )
             )}

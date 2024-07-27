@@ -87,7 +87,7 @@ export default function DashboardServices() {
       link: "",
     },
     {
-      title: " Stay tuned",
+      title: "Stay tuned",
       description: "Many more such amazing tools coming very soon.",
       icon: <IconNotes />,
       link: "",
