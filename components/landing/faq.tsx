@@ -15,6 +15,8 @@ import {
 // Custom components
 import { Section, Container } from "@/components/craft";
 
+import Link from "next/link";
+
 type FAQItem = {
   question: string;
   answer: string;
@@ -26,7 +28,7 @@ const content: FAQItem[] = [
     question: "Lorem ipsum dolor sit amet?",
     answer:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    link: "https://google.com",
+    // link: "https://google.com",
   },
   {
     question: "Ut enim ad minim veniam?",
@@ -51,8 +53,10 @@ const FAQ = () => {
       <Container>
         <h3 className="!mt-0">Frequently Asked Questions</h3>
         <h4 className="text-muted-foreground">
-          Can&apos;t find the answer you&apos;re looking for? Reach out to our
-          customer support team.
+          Can&apos;t find the answer you&apos;re looking for? Reach out to us at{" "}
+          <Link href="mailto:contact@orom.club" className="text-black">
+            contact@orom.club
+          </Link>
         </h4>
         <div className="not-prose mt-4 flex flex-col gap-4 md:mt-8">
           {content.map((item, index) => (
@@ -67,12 +71,12 @@ const FAQ = () => {
                 <AccordionContent className="text-base md:w-3/4">
                   {item.answer}
                   {item.link && (
-                    <a
+                    <Link
                       href={item.link}
                       className="mt-2 flex w-full items-center opacity-60 transition-all hover:opacity-100"
                     >
                       Learn more <ArrowUpRight className="ml-1" size="16" />
-                    </a>
+                    </Link>
                   )}
                 </AccordionContent>
               </AccordionItem>

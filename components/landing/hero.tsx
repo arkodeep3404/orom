@@ -71,35 +71,43 @@ export default function Hero() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      toast("", {
-        description: "",
+    const time1 = setTimeout(() => {
+      toast("a", {
+        description: "a",
       });
     }, 1000);
 
-    setTimeout(() => {
-      toast("", {
-        description: "",
+    const time2 = setTimeout(() => {
+      toast("b", {
+        description: "b",
       });
     }, 30000);
 
-    setTimeout(() => {
-      toast("", {
-        description: "",
+    const time3 = setTimeout(() => {
+      toast("c", {
+        description: "c",
       });
     }, 60000);
 
-    setTimeout(() => {
-      toast("", {
-        description: "",
+    const time4 = setTimeout(() => {
+      toast("d", {
+        description: "d",
       });
     }, 90000);
 
-    setTimeout(() => {
-      toast("", {
-        description: "",
+    const time5 = setTimeout(() => {
+      toast("e", {
+        description: "e",
       });
     }, 120000);
+
+    return () => {
+      clearTimeout(time1),
+        clearTimeout(time2),
+        clearTimeout(time3),
+        clearTimeout(time4),
+        clearTimeout(time5);
+    };
   }, []);
 
   return (
@@ -125,7 +133,7 @@ export default function Hero() {
             variant="outline"
           >
             <Link href="">
-              Join 40+ People Now
+              Join 40+ People. Hurry, Limited Spots Available
               <ArrowDown className="ml-2 w-4" />
             </Link>
           </Button>

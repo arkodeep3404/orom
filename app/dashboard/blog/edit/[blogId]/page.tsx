@@ -4,13 +4,17 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
-import remarkGfm from "remark-gfm";
 import { evaluate } from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime";
-import { mdxStyles } from "@/lib/mdxStyles/mdxStyles";
-import { Note } from "@/lib/mdxStyles/Callouts";
+import mdxComponents from "@/lib/mdxStyles/mdxStyles";
 import { EvaluateOptions } from "@mdx-js/mdx";
 import { MDXContent } from "mdx/types";
+import { toast } from "sonner";
+
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 
 export default function BlogEditor() {
   const [blog, setBlog] = useState<string>("");
@@ -21,22 +25,23 @@ export default function BlogEditor() {
     setShow(true);
   }, []);
 
-  const mdxFinalStyles = {
-    ...mdxStyles,
-    Note,
-  };
+  async function render(): Promise<void> {
+    try {
+      const { default: resultMdx } = await evaluate(blog, {
+        ...runtime,
+        remarkPlugins: [remarkGfm, remarkMath],
+        rehypePlugins: [rehypeKatex],
+        useMDXComponents: () => mdxComponents,
+      } as EvaluateOptions);
 
-  async function test(): Promise<void> {
-    const { default: resultMdx } = await evaluate(blog, {
-      ...runtime,
-      remarkPlugins: [remarkGfm],
-      useMDXComponents: () => mdxFinalStyles,
-    } as EvaluateOptions);
-    setFinalMdx(resultMdx);
+      setFinalMdx(resultMdx);
+    } catch (error: any) {
+      toast(error);
+    }
   }
 
   useEffect(() => {
-    test();
+    render();
   }, [blog]);
 
   if (!show) {
