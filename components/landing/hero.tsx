@@ -44,20 +44,63 @@ export default function Hero() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+
+    const url =
+      "https://script.google.com/macros/s/AKfycbzeIdlL_G1yKpqOmRw1NsX-DUMUl9RZ7rTciKwvkKj5h7U9osAxXEQn0idAe82a6ntcwg/exec";
+    const formData = new FormData();
+
+    formData.append("email", values.email);
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      });
+
+      toast("Thanks for joining the waitlist for Orom!", {
+        description:
+          "We’ll keep you updated with the latest news and launch details. Stay tuned!",
+      });
+    } catch (error: any) {
+      toast(error);
+    }
   }
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     toast("hello there");
-  //     toast("hello there 2");
-  //   });
+  useEffect(() => {
+    setTimeout(() => {
+      toast("", {
+        description: "",
+      });
+    }, 1000);
 
-  //   return () => clearTimeout(timeout);
-  // }, []);
+    setTimeout(() => {
+      toast("", {
+        description: "",
+      });
+    }, 30000);
+
+    setTimeout(() => {
+      toast("", {
+        description: "",
+      });
+    }, 60000);
+
+    setTimeout(() => {
+      toast("", {
+        description: "",
+      });
+    }, 90000);
+
+    setTimeout(() => {
+      toast("", {
+        description: "",
+      });
+    }, 120000);
+  }, []);
 
   return (
     <Section>
@@ -82,7 +125,8 @@ export default function Hero() {
             variant="outline"
           >
             <Link href="">
-              Join 40+ people now <ArrowDown className="ml-2 w-4" />
+              Join 40+ People Now
+              <ArrowDown className="ml-2 w-4" />
             </Link>
           </Button>
           <Form {...form}>

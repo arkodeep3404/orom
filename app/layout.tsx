@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <RecoilContextProvider>
           {children}
-          <Toaster />
+          <Toaster position="top-right" expand />
         </RecoilContextProvider>
       </body>
     </html>

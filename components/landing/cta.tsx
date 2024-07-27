@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -33,10 +34,30 @@ export function CTA() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+
+    const url =
+      "https://script.google.com/macros/s/AKfycbzeIdlL_G1yKpqOmRw1NsX-DUMUl9RZ7rTciKwvkKj5h7U9osAxXEQn0idAe82a6ntcwg/exec";
+    const formData = new FormData();
+
+    formData.append("email", values.email);
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      });
+
+      toast("Thanks for joining the waitlist for Orom!", {
+        description:
+          "We’ll keep you updated with the latest news and launch details. Stay tuned!",
+      });
+    } catch (error: any) {
+      toast(error);
+    }
   }
 
   return (
