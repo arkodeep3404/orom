@@ -72,32 +72,50 @@ export default function Hero() {
 
   useEffect(() => {
     const time1 = setTimeout(() => {
-      toast("a", {
-        description: "a",
+      toast("Simplify Your Workflow with Orom", {
+        description:
+          "Tired of juggling multiple tools? Orom consolidates all your outreach, marketing, and lead management needs into one easy-to-use platform. Join our waitlist today!",
+        duration: 15000,
       });
-    }, 1000);
+    }, 500);
 
     const time2 = setTimeout(() => {
-      toast("b", {
-        description: "b",
+      toast("Boost Your Business Efficiency", {
+        description:
+          "Save time and reduce costs with Orom’s integrated solution. Streamline your operations and focus on growing your business. Sign up for the waitlist now!",
+        duration: 15000,
       });
     }, 30000);
 
     const time3 = setTimeout(() => {
-      toast("c", {
-        description: "c",
+      toast("Stay Ahead of the Competition", {
+        description:
+          "Gain a competitive edge with Orom’s powerful features. Customize, automate, and manage all your business needs seamlessly. Subscribe to our waitlist for early access!",
+        duration: 15000,
       });
     }, 60000);
 
     const time4 = setTimeout(() => {
-      toast("d", {
-        description: "d",
+      toast("Engage Your Customers Better", {
+        description:
+          "Enhance customer engagement and boost conversion rates with Orom. Centralize feedback, streamline communication, and drive success. Get on our waitlist today!",
+        duration: 15000,
       });
     }, 90000);
 
-    const time5 = setTimeout(() => {
-      toast("e", {
-        description: "e",
+    // const time5 = setTimeout(() => {
+    //   toast("Hassle-Free Marketing and Lead Management", {
+    //     description:
+    //       "Orom offers everything you need in one place. From marketing campaigns to lead tracking, simplify your efforts and see results. Join our waitlist for updates!",
+    //     duration: 10000,
+    //   });
+    // }, 80000);
+
+    const time6 = setTimeout(() => {
+      toast("Ready to Transform Your Business?", {
+        description:
+          "Orom offers everything you need in one place. From marketing campaigns to lead tracking, simplify your efforts and see results. Join our waitlist for updates!",
+        duration: 15000,
       });
     }, 120000);
 
@@ -106,7 +124,8 @@ export default function Hero() {
         clearTimeout(time2),
         clearTimeout(time3),
         clearTimeout(time4),
-        clearTimeout(time5);
+        //clearTimeout(time5);
+        clearTimeout(time6);
     };
   }, []);
 
