@@ -24,6 +24,8 @@ export const waitlistsDetailState = atom<InitialWaitlistSchema>({
       XUrl: "",
       YouTubeUrl: "",
       LinkedInUrl: "",
+      GitHubUrl: "",
+      DiscordUrl: "",
     },
     waitlistEmails: [""],
   },

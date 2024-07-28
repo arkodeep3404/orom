@@ -7,6 +7,8 @@ import {
   IconBrandX,
   IconBrandYoutube,
   IconBrandLinkedin,
+  IconBrandGithub,
+  IconBrandDiscord,
 } from "@tabler/icons-react";
 import { WaitlistSchema } from "@/lib/dbSchemas/waitlistSchema";
 import axios from "axios";
@@ -15,10 +17,6 @@ import { useEffect, useState } from "react";
 import mongoose from "mongoose";
 
 export default function EmailEditor() {
-  interface fetchWaitlistType extends WaitlistSchema {
-    _id: mongoose.Types.ObjectId;
-  }
-
   const initialWaitlistState = {
     _id: new mongoose.Types.ObjectId(),
     userId: new mongoose.Types.ObjectId(),
@@ -31,13 +29,16 @@ export default function EmailEditor() {
       XUrl: "",
       YouTubeUrl: "",
       LinkedInUrl: "",
+      GitHubUrl: "",
+      DiscordUrl: "",
     },
     waitlistEmails: [""],
   };
 
   const params = useParams();
-  const [waitlistDetails, setWaitlistDetails] =
-    useState<fetchWaitlistType>(initialWaitlistState);
+  const [waitlistDetails, setWaitlistDetails] = useState<WaitlistSchema | any>(
+    initialWaitlistState
+  );
 
   async function fetchWaitlistDetails() {
     const response = await axios.get("/api/shareScripts/waitlistScript", {
@@ -81,6 +82,18 @@ export default function EmailEditor() {
       platform: "LinkedIn",
       url: waitlistDetails.socialUrls.LinkedInUrl,
       icon: <IconBrandLinkedin />,
+    },
+    {
+      id: 6,
+      platform: "GitHub",
+      url: waitlistDetails.socialUrls.GitHubUrl,
+      icon: <IconBrandGithub />,
+    },
+    {
+      id: 7,
+      platform: "Discord",
+      url: waitlistDetails.socialUrls.DiscordUrl,
+      icon: <IconBrandDiscord />,
     },
   ];
 

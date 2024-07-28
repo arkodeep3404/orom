@@ -39,7 +39,7 @@ export async function POST(req: Request) {
   if (!success) {
     return Response.json(
       {
-        message: "incorrect email",
+        message: "invalid email",
       },
       { status: 411 }
     );

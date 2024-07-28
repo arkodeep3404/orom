@@ -126,6 +126,30 @@ export default function WaitlistDetailsCard({
                 value={data.socialUrls.LinkedInUrl}
               />
             </div>
+
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="GitHubUrl">GitHub Link</Label>
+              <Input
+                id="GitHubUrl"
+                placeholder="Your GitHub Account Url"
+                onChange={(e) =>
+                  updateWaitlistCard("GitHubUrl", e.target.value)
+                }
+                value={data.socialUrls.GitHubUrl}
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="DiscordUrl">Discord Link</Label>
+              <Input
+                id="DiscordUrl"
+                placeholder="Your Discord Account Url"
+                onChange={(e) =>
+                  updateWaitlistCard("DiscordUrl", e.target.value)
+                }
+                value={data.socialUrls.DiscordUrl}
+              />
+            </div>
           </div>
         </form>
       </CardContent>

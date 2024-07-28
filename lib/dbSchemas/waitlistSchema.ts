@@ -6,9 +6,11 @@ export interface SocialUrlsType {
   XUrl: string;
   YouTubeUrl: string;
   LinkedInUrl: string;
+  GitHubUrl: string;
+  DiscordUrl: string;
 }
 
-export interface WaitlistSchema {
+export interface WaitlistSchema extends Document {
   userId: mongoose.Types.ObjectId;
   waitlistName: string;
   waitlistTitle: string;
@@ -35,6 +37,16 @@ export const SocialUrlsTypeSchema: Schema<SocialUrlsType> = new Schema({
     default: "",
   },
   LinkedInUrl: {
+    type: String,
+    required: false,
+    default: "",
+  },
+  GitHubUrl: {
+    type: String,
+    required: false,
+    default: "",
+  },
+  DiscordUrl: {
     type: String,
     required: false,
     default: "",
