@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import RecoilContextProvider from "@/lib/stateStore/globalState";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <RecoilContextProvider>
-          {children}
-          <Toaster position="top-right" expand duration={5000} />
-        </RecoilContextProvider>
+        <Suspense fallback={<>Loading...</>}>
+          <RecoilContextProvider>
+            {children}
+            <Toaster position="top-right" expand duration={5000} />
+          </RecoilContextProvider>
+        </Suspense>
       </body>
     </html>
   );
