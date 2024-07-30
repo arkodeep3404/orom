@@ -77,7 +77,7 @@ export default function Hero() {
           "Tired of juggling multiple tools? Orom consolidates all your outreach, marketing, and lead management needs into one easy-to-use platform. Join our waitlist today!",
         duration: 15000,
       });
-    }, 500);
+    }, 1000);
 
     const time2 = setTimeout(() => {
       toast("Boost Your Business Efficiency", {
