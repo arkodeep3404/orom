@@ -26,7 +26,7 @@ export default function Login() {
 
   useEffect(() => {
     setJWTToken();
-  });
+  }, []);
 
   return (
     <div>
